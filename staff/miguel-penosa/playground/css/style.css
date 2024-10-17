@@ -1,0 +1,100 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: yellow;
+    color: #333;
+}
+
+/* Estilos para los encabezados */
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    font-size: 2.5em;
+}
+
+h2,
+h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Estilos para las listas */
+ul {
+    list-style-type: circle;
+    padding-left: 20px;
+    color: red;
+}
+
+ol {
+    list-style-type: decimal;
+    padding-left: 20px;
+    color: blue;
+}
+
+/* Enlaces */
+a {
+    color: #1a73e8;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Texto */
+b {
+    font-weight: bold;
+}
+
+i {
+    font-style: italic;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Imagen */
+img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Parrafo */
+p {
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 20px;
+}
+
+/* Estilo para saltos de línea */
+br {
+    margin-bottom: 10px;
+}
