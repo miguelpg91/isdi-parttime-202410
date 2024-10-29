@@ -19,10 +19,10 @@ console.log("TEST Dorraymon.prototype.at()")
 
 var cultmovies = new Dorraymon()
 
-cultmovies[0] = ["Goodfellas";]
-cultmovies[1] = ["Godfather";]
-cultmovies[2] = ["Alien";]
-cultmovies[3] = ["Blade Runner";]
+cultmovies[0] = ["Goodfellas"]
+cultmovies[1] = ["Godfather"]
+cultmovies[2] = ["Alien"]
+cultmovies[3] = ["Blade Runner"]
 cultmovies.length = 4;
 
 console.log("CASE access last movie using at()")
@@ -35,7 +35,21 @@ var cultmovies = ("Clockworkorange", "Godfather", "Alien", "Blade Runner")
 var damovie = cultmovies.at
 console.log(damovie)
 
-const cultmovies = ¨{ "Goodfellas", "Godfather", "Alien", "Blade Runner"};
+const cultmovies = { "Goodfellas", "Godfather", "Alien", "Blade Runner" };
 
 // Usando el método at para acceder a elementos
 console.log(cultmovies.at(0));
+
+///
+
+var coches = new Dorraymon()
+coches[0] = { marca: "Toyota", modelo: "Corolla", año: 1999 };
+coches[1] = { marca: "Mercedes", modelo: "Clase C", año: 1993 };
+coches[2] = { marca: "Lexus", modelo: "RX", año: 2005 };
+coches[3] = { marca: "Mazda", modelo: "Mazda 3", año: 1991 };
+coches.length = 4;
+
+var resultadoCoche = coches.at(-2);
+console.log(resultadoCoche); ///marca: 'Lexus', modelo: 'RX', año: 2005
+
+///

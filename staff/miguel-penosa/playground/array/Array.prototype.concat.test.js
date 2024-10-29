@@ -2,12 +2,56 @@ function Dorraymon() {
     this.length = 0;
 }
 
-Dorraymon.prototype.concat = function (values) {
+Dorraymon.prototype.concat = function (values) { ///si quieres manejar una cantidad variable de argumentos, arguments te permite acceder a todos los valores pasados sin necesidad de definirlos explícitamente.(vacio)
     var result = new Dorraymon
+    //this -> Dorraymon {0:"apple",1:"orange",2:"lemon",3:"banana",4:"cherry",length:5}
+    //values -> Dorraymon {0:"lettuce",1:"onion",2:"garlic",3:"carrot",4:"lentice",length:5}
+    //result -> Dorraymon {length:0}
+
+    //result [0] = this[0] // result -> Dorraymon { 0: "apple", length: 0 }
+    //result.length++      // result -> Dorraymon { 0: "apple", length: 1 }
+
+    //result [1] = this[1] // result -> Dorraymon { 0: "apple", 1: "orange", length: 1 }
+    //result.length++      // result -> Dorraymon { 0: "apple", 1: "orange", length: 2 }
+
+    //result [2] = this[2] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", length: 2 }
+    //result.length++    //   result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", length: 3 }
+
+    //result [3] = this[3] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", length: 3 }
+    //result.length++   //      result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", length: 4 }
+
+    //result [4] = this[4] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", length: 4 }
+    //result.length++ //      result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", length: 5 }
+
     for (var i = 0; i < this.length; i++) {
-        result[i] = this[i]
+        result[i] = this[i]     ///copia elementos de this (el primer objeto Dorraymon) en el mismo índice dentro de result
         result.length++
     }
+
+    //result [5] = values[0] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", length: 5 }
+    //result.length++ //        result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", length: 6 }
+
+    //result [6] = values[1] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion", length: 6 }
+    //result.length++ //        result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce"", 6: "onion",  length: 7 }
+
+    //result [7] = values[2] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", length: 7 }
+    //result.length++ //        result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", length: 8 }
+
+    //result [8] = values[3] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", 8: "carrot", length: 8 }
+    //result.length++ //        result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", 8: "carrot", length: 9 }
+
+    //result [9] = values[4] // result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", 8: "carrot", 9: "lentice", length: 9 }
+    //result.length++ //        result -> Dorraymon { 0: "apple", 1: "orange", 2: "lemon", 3: "banana", 4: "cherry", 5: "lettuce", 6: "onion" 7: "garlic", 8: "carrot", 9: "lentice", length: 10 }
+
+    for (var i = 0; i < values.length; i++) {
+        result[result.length] = values[i]       ///values[i] añade elementos de values (el segundo objeto Dorraymon) al final de result, usando result.length para colocar cada elemento en la siguiente posición libre.
+        result.length++
+    }
+
+    return result
+
+
+
 }
 console.log("TEST Dorraymon.prototype.concat")
 console.log("CASE merge fruits and veggies")
@@ -29,14 +73,24 @@ veggies[2] = "garlic";
 veggies[3] = "carrot";
 veggies[4] = "lentice";
 veggies.length = 5
+/*
 
-var food = fruits.concat(veggies)
+var drinks = new Dorraymon()
+drinks[0] = "cocacola";
+drinks[1]= "cerveza";
+drinks[2] = "vino";
+drinks.length = 3;
+
+*/
+
+
+var food = fruits.concat(veggies) //el objeto fruits es quien llama al método concat, de esta forma, this se refiere al objeto que lo invoca, en este caso, fruits.
 
 console.log(fruits)
 console.log(veggies)
 console.log(food)
 
-////
+/*
 
 
 // Función constructora para inicializar una lista de deportes
@@ -79,3 +133,5 @@ var deportesCombinados = misDeportes1.concat(misDeportes2);
 
 // Imprimir los deportes combinados
 console.log(deportesCombinados);
+
+*/
