@@ -1,4 +1,8 @@
+///DATA
+
 var users = [] //Array para almacenar usuarios
+
+////PRESENTATION AND BUSINESS (LOGIC)
 
 var body = document.body //no se usa documentElement con el body porque está implemenetado
 
@@ -7,7 +11,9 @@ title.innerText = ("Hola, App")
 
 body.appendChild(title)
 
-var landingView = document.createElement("main")////////Cuando document.createElement ?
+///LANDING
+
+var landingView = document.createElement("main")
 body.appendChild(landingView)
 
 var intro = document.createElement("h2") //
@@ -15,11 +21,13 @@ intro.innerText = ("Welcome!")
 
 landingView.appendChild(intro)
 
-var landingIntro = document.createElement("p")
-landingView.appendChild(landingIntro)/////OJO
+
+
+var landingIntro = document.createElement("p")/////¿¿¿porque este bloque???
+landingView.appendChild(landingIntro)/////¿¿¿porque este bloque???
 
 var landingRegisterLink = document.createElement("a")
-landingRegisterLink.href = ""
+landingRegisterLink.href = "#"
 landingRegisterLink.innerText = "Register"
 landingIntro.appendChild(landingRegisterLink)
 
@@ -34,7 +42,7 @@ var landingIntroOrText = new Text("or")///////////
 landingIntro.appendChild(landingIntroOrText)
 
 var landingLoginLink = document.createElement("a")
-landingLoginLink.href = "";
+landingLoginLink.href = "#";
 landingLoginLink.innerText = "Login"
 landingIntro.appendChild(landingLoginLink)
 
@@ -67,7 +75,7 @@ registerFormUserNameLabel.htmlFor = "username"
 registerForm.appendChild(registerFormUserNameLabel)
 
 var registerFormUserNameInput = document.createElement("input")
-registerFormUserNameLabel.type = "text"
+registerFormUserNameInput.type = "text"
 registerFormUserNameInput.id = "username"
 registerForm.appendChild(registerFormUserNameInput)
 
@@ -102,24 +110,45 @@ registerForm.appendChild(registerFormSubmitButton)
 
 
 
-registerForm.onsubmit = function (event) {
+registerForm.onsubmit = function (event) { ///Define una función que se ejecutará al enviar el formulario "registerForm"
     event.preventDefault()
     var name = registerFormNameInput.value
-    var email = registerFormEmailInput.value
+    var email = registerFormEmailInput.value    //////// Obtiene el valor del campo de entrada "email" y lo asigna a la variable "email"
     var username = registerFormUserNameInput.value
     var password = registerFormPasswordInput.value
 
-    var user = {
+    var found = users.some(function (user) {
+        if (user.email === email || user.username === username)
+            return true
+        return false
+    });
+    if (found) {
+        alert("user already exist")
+        return
+    }
+    var user = {}               // // Crea un objeto llamado "user" que contendrá los datos del nuevo usuario
+    user.name = name,
+        user.email = email,           ///////// Asigna el valor de la variable "email" al campo "email" del objeto
+        user.username = username,
+        user.password = password
+
+    users.push(user);
+
+
+
+    /*
+
+    var user = {                // // Crea un objeto llamado "user" que contendrá los datos del nuevo usuario
         name: name,
-        email: email,
+        email: email,           ///////// Asigna el valor de la variable "email" al campo "email" del objeto
         username: username,
         password: password
     };
-    users.push(user);
+    users.push(user);           // Agrega el nuevo usuario al array "users"
     console.log("Usuario registrado", user);
-    console.log("Usuarios registrados", users);
-
-    registerForm.reset()
+    console.log("Usuarios registrados", users); ///users es un array de todos los user LINEA 1
+*/
+    registerForm.reset()        // Limpia el formulario después de registrar al usuario
 
     body.removeChild(registerView)
     body.appendChild(loginView)
@@ -157,7 +186,7 @@ loginFormUserNameLabel.htmlFor = "username"
 loginForm.appendChild(loginFormUserNameLabel)
 
 var loginFormUserNameInput = document.createElement("input")
-loginFormUserNameLabel.type = "text"
+loginFormUserNameInput.type = "text"
 loginFormUserNameInput.id = "username"
 loginForm.appendChild(loginFormUserNameInput)
 
@@ -175,14 +204,13 @@ loginForm.appendChild(loginFormEmailInput)
 
 //////PASSWORD
 
-var loginFormPasswordLabel = document.createElement("label")
+var loginFormPasswordLabel = document.createElement("label")///label: Muestra el texto "Password" 
 loginFormPasswordLabel.innerText = "Password"
-loginFormPasswordLabel.htmlFor = "password"
-loginForm.appendChild(loginFormPasswordLabel)
+loginFormPasswordLabel.htmlFor = "password"/// htmlFor: se vincula al campo de entrada (input)
 
-var loginFormPasswordInput = document.createElement("input")
+var loginFormPasswordInput = document.createElement("input")    ///input: Es el campo donde el usuario escribe la contraseña
 loginFormPasswordInput.type = "password"
-loginFormPasswordInput.id = "password"
+loginFormPasswordInput.id = "password"///id: permite que el <label> se relacione directamente con él.
 loginForm.appendChild(loginFormPasswordInput)
 
 var loginFormSubmitButton = document.createElement("button")
@@ -191,42 +219,39 @@ loginFormSubmitButton.innerText = "Login"
 loginForm.appendChild(loginFormSubmitButton)
 
 
-loginForm.onSubmit = function (event) {
-    event.preventDefault() //// //preventDefault: Evita que el formulario se envíe y la página se recargue
+loginForm.onsubmit = function (event) { // Define la función
+    event.preventDefault(); // Evita el envío del formulario
 
+    var username = loginFormUserNameInput.value;
+    var password = loginFormPasswordInput.value;
 
+    var foundUser = users.find(function (user) { // Corrige el paréntesis de cierre
+        return user.username === username && user.password === password;
+    });
 
-
-
-
-}
-
-    ///TODO validate credentials against users db (HINT find). if credentials ok, then go to home. otherwise show alert with: wrong credentials
-
-
-    */*
-loginForm.onsubmit = function (event) {
-    event.preventDefault()
-    var username = loginFormUserNameInput.value
-    var password = loginFormPasswordInput.value
-
-    var foundUser = users.find(function(user) {
-        return user.username === username && user.password === password
-    })
-
-    if (foundUser) {
+    if (foundUser) {    //// Si se encuentra un usuario con las credenciales correctas
         console.log("Login exitoso:", foundUser)
-        // Lógica para mostrar la vista de inicio o home
-        alert("Bienvenido " + foundUser.name + "!")
-        loginForm.reset()
+        alert("Bienvenido " + foundUser.name + "!")        //Imprime: "string" + usuario
+
+
+        loginForm.reset() // Limpia el formulario de inicio de sesión
+
         // Redirigir a la vista de inicio
-        body.removeChild(loginView)
+        body.removeChild(loginView) // Elimina la vista de inicio de sesión
+
         var homeView = document.createElement("main")
         var homeTitle = document.createElement("h2")
-        homeTitle.innerText = "Bienvenido a tu Home"
+        homeTitle.innerText = "Home"
         homeView.appendChild(homeTitle)
-        body.appendChild(homeView)
+        body.appendChild(homeView) // Agrega la vista de inicio al cuerpo del documento(BODY: CONTENEDOR PRINCIPAL)
+
+
     } else {
-        alert("Credenciales incorrectas")
+        alert("Usuario no encontrado")
     }
-}
+};
+
+
+///TODO validate credentials against users db (HINT find). if credentials ok, then go to home. otherwise show alert with: wrong credentials
+
+
