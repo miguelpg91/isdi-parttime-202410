@@ -1,10 +1,10 @@
 ///HOME///
 
-var body = document.body
-
 var homeView = document.createElement('main')
 
-if (isUserLoggedIn())                       ///isUserLoggedIn : LOGIC.JS
+//////// Verifica si el usuario ha iniciado sesión usando ////////////
+
+if (isUserLoggedIn())                       ///isUserLoggedIn : LOGIC.JS;     (logic.isUserLoggedIn())   
     body.appendChild(homeView)          ///// Si el usuario ha iniciado sesión (determinando con `isUserLoggedIn()`), añade `homeView` al cuerpo de la página (`body`).
 
 var homeTitle = document.createElement('h2')
@@ -15,24 +15,22 @@ var homeUser = document.createElement('h3')
 homeUser.innerText = 'Hello, User!'             ///porque este texto si luego linea 18????
 homeView.appendChild(homeUser)
 
-if (isUserLoggedIn()) {                 //Devuelve verdadero si hay un usuario logueado (si userId está en sessionStorage)
+////// Si el usuario ha iniciado sesión, obtiene su nombre con `getUserName()`////////////
 
-    homeUser.innerText = 'Hello, ' + getUsername() + '!'    ///AÑADIDO () EN GETUSERNAME
+if (isUserLoggedIn()) {      //Devuelve verdadero si hay un usuario logueado (si userId está en sessionStorage); logic.isUserLoggedIn())
+    var name = logic.getUserName()
+
+    homeUser.innerText = 'Hello, ' + name + '!'    ///AÑADIDO () EN GETUSERNAME; var name = logic.getUserName
 }
 
-
-
 // Si el usuario ha iniciado sesión, obtiene su nombre mediante `getUserName()` y actualiza el texto del saludo para personalizarlo.
-
-
-
 
 var homeLogoutButton = document.createElement('button')
 homeLogoutButton.innerText = 'Logout'
 homeView.appendChild(homeLogoutButton)
 
 homeLogoutButton.onclick = function () {        // Crea un botón con el texto "Logout" para cerrar sesión y lo añade a `homeView`.
-    logoutUser()
+    logoutUser()        ///logic.logoutUser()?
 
     body.removeChild(homeView)
     body.appendChild(loginView)
@@ -50,8 +48,10 @@ homeAddPostButton.onclick = function () {
 var homePosts = document.createElement('section')
 homeView.appendChild(homePosts)
 
-if (isUserLoggedIn()) {
-    var posts = getPosts()
+////// Si el usuario está logueado, obtiene y muestra todas las publicaciones guardadas//////
+
+if (isUserLoggedIn()) {         //(logic.isUserLoggedIn())
+    var posts = getPosts()      //var posts = logic.getPosts()
 
     homePosts.innerHTML = ''
 
@@ -110,6 +110,8 @@ var homeCreatePostSubmitButton = document.createElement('button')
 homeCreatePostSubmitButton.innerText = 'Create'
 homeCreatePostSubmitButton.type = 'submit'
 homeCreatePostForm.appendChild(homeCreatePostSubmitButton)
+
+//// Función que maneja el envío del formulario
 
 homeCreatePostForm.onsubmit = function (event) {
     event.preventDefault()

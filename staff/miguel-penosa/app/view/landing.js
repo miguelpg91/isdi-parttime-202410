@@ -1,6 +1,3 @@
-var body = document.body
-
-///LANDING
 
 var landingView = document.createElement("main")
 body.appendChild(landingView)
@@ -10,20 +7,22 @@ intro.innerText = ("Welcome!")
 
 landingView.appendChild(intro)
 
+//landingIntro: agrupa en un mismo bloque el enlace de "Register," el texto "or," y el enlace de "Login.
 
-
-var landingIntro = document.createElement("p")/////¿¿¿porque este bloque???
-landingView.appendChild(landingIntro)/////¿¿¿porque este bloque???
+var landingIntro = document.createElement("p")
+landingView.appendChild(landingIntro)
 
 var landingRegisterLink = document.createElement("a")
-landingRegisterLink.href = "#"
+landingRegisterLink.href = ""
 landingRegisterLink.innerText = "Register"
 landingIntro.appendChild(landingRegisterLink)
 
+//// Controla el clic en el enlace "Register"////
+
 landingRegisterLink.onclick = function (event) {
-    event.preventDefault()///////////
+    event.preventDefault()                          //Evita que el enlace recargue la página
     console.log("go to register")
-    body.removeChild(landingView)////LINEA 10, 11
+    body.removeChild(landingView)
     body.appendChild(registerView)
 }
 
@@ -34,6 +33,8 @@ var landingLoginLink = document.createElement("a")
 landingLoginLink.href = "";
 landingLoginLink.innerText = "Login"
 landingIntro.appendChild(landingLoginLink)
+
+///// Controla el clic en el enlace "Login"
 
 landingLoginLink.onclick = function (event) {
     event.preventDefault()
