@@ -31,7 +31,7 @@ class Trump extends Thing {
         trumpBodyImage.style.top = "18px";
 
         var STEP = 10;
-        var currentImage = trumpFaceImage;  // Esta variable llevará el seguimiento de la imagen actual.
+        var currentImage = trumpFaceImage;  // ???
 
         document.addEventListener('keydown', function (event) {
             if (event.key === 'k') {
