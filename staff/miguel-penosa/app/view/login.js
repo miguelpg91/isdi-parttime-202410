@@ -1,99 +1,78 @@
-///LOGIN///
+class Login extends Component {
+    constructor() {
+        super(document.createElement("main"))       //super Permite que Login herede correctamente las propiedades y métodos de Component
 
-var loginView = document.createElement("main")
+        const title = new Heading(2)    // Crea un h2.
+        title.setText("Login")          // Establece el texto del título.
+        this.add(title)                 // Agrega title directamente a Login
 
-loginTitle = document.createElement("h2")
-loginTitle.innerText = "Login"
-loginView.appendChild(loginTitle)
+        const form = new Form
+        this.add(form)
 
-var loginForm = document.createElement("form")
-loginView.appendChild(loginForm)
+        // username
 
-///////USERNAME
+        const usernameLabel = new Label("username")
+        usernameLabel.setText("Username")
+        form.add(usernameLabel)     // Agrega la etiqueta al formulario.
 
-var loginFormUsernameLabel = document.createElement("label")
-loginFormUsernameLabel.innerText = "Username"
-loginFormUsernameLabel.htmlFor = "username"
-loginForm.appendChild(loginFormUsernameLabel)
+        const usernameInput = new Input('text', 'username')
+        form.add(usernameInput)     // Agrega el campo al formulario.
 
-var loginFormUsernameInput = document.createElement("input")
-loginFormUsernameInput.type = "text"
-loginFormUsernameInput.id = "username"
-loginForm.appendChild(loginFormUsernameInput)
+        // password
 
-//////PASSWORD
+        const passwordLabel = new Label('password')
+        passwordLabel.setText('Password')
+        form.add(passwordLabel)
 
-var loginFormPasswordLabel = document.createElement("label")///label: Muestra el texto "Password" 
-loginFormPasswordLabel.innerText = "Password"
-loginFormPasswordLabel.htmlFor = "password"
+        const passwordInput = new Input('password', 'password')
+        form.add(passwordInput)
 
-var loginFormPasswordInput = document.createElement("input")
-loginFormPasswordInput.type = "password"
-loginFormPasswordInput.id = "password"
-loginForm.appendChild(loginFormPasswordInput)
+        const submitButton = new Button('submit')
+        submitButton.setText('Login')
+        form.add(submitButton)
 
-var loginFormSubmitButton = document.createElement("button")
-loginFormSubmitButton.type = "submit"
-loginFormSubmitButton.innerText = "Login"
-loginForm.appendChild(loginFormSubmitButton)
+        const registerLink = new Link
+        registerLink.setText('Register')
+        this.add(registerLink)
+    }
+
+    onRegisterClick(callback) {
+        const registerLink = this.children[2]   //El tercer hijo directo(this.add) de Login (registerLink) 
+
+        registerLink.addBehavior("click", event => {     // Agrega un comportamiento al hacer clic.
+            event.preventDefault()
+
+            callback()
+        })
+    }
+
+    onLoggedIn(callback) {
+        const form = this.children[1]
+
+        form.addBehavior("submit", event => {
+            event.preventDefault()
+
+            const usernameInput = form.children[1]
+            const passwordInput = form.children[3]
+
+            const username = usernameInput.getValue()
+            const password = passwordInput.getValue()
+
+            try {
+                logic.loginUser(username, password)
+
+                form.clear()
+
+                callback()
+
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
 
 
-loginForm.onsubmit = function (event) {   // onsubmit : Se usa principalmente para personalizar lo que ocurre al enviar un formulario // asigna una función al evento submit  
-    event.preventDefault()
-
-    var username = loginFormUsernameInput.value     // Captura el valor del campo de username
-    var password = loginFormPasswordInput.value     // Captura el valor del campo de password
-
-    try {
-        loginUser(username, password)
-
-        loginForm.reset()       // Borra los campos del formulario
-
-        var name = getUserName()
-
-        homeUser.innerText = 'Hello, ' + name + '!'
-
-        var posts = getPosts()
-
-        homePosts.innerHTML = ''
-
-        posts.forEach(function (post) {
-            var homePost = document.createElement('article')
-            homePosts.appendChild(homePost)
-
-            var postAuthor = document.createElement('h3')
-            postAuthor.innerText = post.author
-            homePost.appendChild(postAuthor)
-
-            var postImage = document.createElement('img')
-            postImage.src = post.image
-            homePost.appendChild(postImage)
-
-            var postCaption = document.createElement('p')
-            postCaption.innerText = post.text
-            homePost.appendChild(postCaption)
-
-            var postDate = document.createElement('time')
-            postDate.innerText = post.date
-            homePost.appendChild(postDate)
+            }
         })
 
-        body.removeChild(loginView)
-        body.appendChild(homeView)
-    } catch (error) {
-        alert(error.message)
-
-        console.error(error)
     }
 }
-
-var loginRegisterLink = document.createElement('a')
-
-loginRegisterLink.onclick = function (event) {
-    event.preventDefault()
-
-    body.removeChild(loginView)
-    body.appendChild(registerView)
-}
-loginView.appendChild(loginRegisterLink)
-

@@ -1,10 +1,24 @@
 // Define la función `loginUser`, que autentica al usuario con su `username` y `password`.
-function loginUser(username, password) {
-    validate.username(username);         //validate parece ser un objeto que contiene funciones para verificar que los datos de entrada, como username y password, cumplan con ciertos criterios 
-    validate.password(password);
+var logic = {};
+(function () {
+    function loginUser(username, password) {
+        validate.username(username);  //validate parece ser un objeto que contiene funciones para verificar que los datos de entrada, como username y password, cumplan con ciertos criterios 
+        validate.password(password);
 
-    var users = JSON.parse(localStorage.users)   ///cual es la formula estandard de localstorage
-}
+        var users = JSON.parse(localStorage.getItem('users')) || [];  ///cual es la formula estandard de localstorage
+
+        var user = users.find(function (user) {
+            return user.username === username && user.password === password;
+        });
+
+        if (!user)
+            throw new Error('wrong credentials');
+
+        sessionStorage.userId = user.id;
+    }
+
+    logic.loginUser = loginUser;
+})();
 
 /*
 

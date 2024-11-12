@@ -1,44 +1,49 @@
+class Landing extends Component {       // Define una clase Landing que hereda de Component
+    constructor() {
+        super(document.createElement("main"))
 
-var landingView = document.createElement("main")
-body.appendChild(landingView)
+        const title = new Heading(2)
+        title.setText("Welcome")
+        this.add(title)     // this para manipular los elementos que pertenecen a esa instancia "Landing
 
-var intro = document.createElement("h2") //
-intro.innerText = ("Welcome!")
+        const intro = new Paragraph
+        this.add(intro)
 
-landingView.appendChild(intro)
+        const registerLink = new Link
+        registerLink.setText("Register")
+        intro.add(registerLink)
 
-//landingIntro: agrupa en un mismo bloque el enlace de "Register," el texto "or," y el enlace de "Login.
+        const orText = new Text(' or ')
+        intro.add(orText)
 
-var landingIntro = document.createElement("p")
-landingView.appendChild(landingIntro)
+        const loginLink = new Link
+        loginLink.setText('Login')
+        intro.add(loginLink)
+    }
 
-var landingRegisterLink = document.createElement("a")
-landingRegisterLink.href = ""
-landingRegisterLink.innerText = "Register"
-landingIntro.appendChild(landingRegisterLink)
+    onRegisterClick(callback) { //callback es simplemente una función que se pasa como argumento
+        const registerLink = this.children[1].children[0]
 
-//// Controla el clic en el enlace "Register"////
+        registerLink.addBehavior("click", event => {    //la función event => {...} se ejecuta cuando el usuario hace clic en el enlace
+            event.preventDefault()
 
-landingRegisterLink.onclick = function (event) {
-    event.preventDefault()                          //Evita que el enlace recargue la página
-    console.log("go to register")
-    body.removeChild(landingView)
-    body.appendChild(registerView)
+            callback() //Cuando se hace clic en un enlace, esa función callback que pasaste es la que se ejecuta.
+        })
+    }
+
+    onLoginClick(callback) {
+        const loginLink = this.children[1].this.children[2]    //el 2º hijo de la instancia  ... y el 3º de intro
+
+        loginLink.addBehavior("click", event => {
+            event.preventDefault()
+
+            callback()
+        })
+    }
 }
 
-var landingIntroOrText = new Text("or")///////////
-landingIntro.appendChild(landingIntroOrText)
 
-var landingLoginLink = document.createElement("a")
-landingLoginLink.href = "";
-landingLoginLink.innerText = "Login"
-landingIntro.appendChild(landingLoginLink)
 
-///// Controla el clic en el enlace "Login"
-
-landingLoginLink.onclick = function (event) {
-    event.preventDefault()
-
-    body.removeChild(landingView)
-    body.appendChild(loginView)
-}
+/*this se refiere a la instancia de la clase Landing.
+Usas this para manipular los elementos que pertenecen a esa instancia, como agregar 
+un nuevo title, un intro, o manipular el comportamiento de los enlaces (click). */

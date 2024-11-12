@@ -1,99 +1,96 @@
+class Register extends Component {
+    constructor() {
+        super(document.createElement("main"))
 
-///REGISTER
+        const title = new Heading(2)
+        title.setText("Register")
+        this.add(title)
 
-var registerView = document.createElement("main")
+        const form = new Form
+        this.add(form)
 
-var registerTitle = document.createElement("h2")
-registerTitle.innerText = "Register"
-registerView.appendChild(registerTitle)
+        // name
+        const nameLabel = new Label('name')
+        nameLabel.setText('Name')
+        form.add(nameLabel)
 
-var registerForm = document.createElement("form")
-registerView.appendChild(registerForm)
+        const nameInput = new Input('text', 'name')
+        form.add(nameInput)
 
-//////NAME
-var registerFormNameLabel = document.createElement("label")
-registerFormNameLabel.innerText = "Name"
-registerFormNameLabel.htmlFor = "name"          /// htmlFor: se vincula al campo de entrada (input)
-registerForm.appendChild(registerFormNameLabel)
+        // email
+        const emailLabel = new Label('email')
+        emailLabel.setText('E-mail')
+        form.add(emailLabel)
 
-var registerFormNameInput = document.createElement("input")     ///input: Es el campo donde el usuario escribe la contraseña
-registerFormNameInput.type = "text"
-registerFormNameInput.id = "name"               ///id: permite que el <label> se relacione directamente con él.
-registerForm.appendChild(registerFormNameInput)
-///////USERNAME
+        const emailInput = new Input('email', 'email')
+        form.add(emailInput)
 
-var registerFormUsernameLabel = document.createElement("label")
-registerFormUsernameLabel.innerText = "Username"
-registerFormUsernameLabel.htmlFor = "username"
-registerForm.appendChild(registerFormUsernameLabel)
+        // username
+        const usernameLabel = new Label('username')
+        usernameLabel.setText('Username')
+        form.add(usernameLabel)
 
-var registerFormUsernameInput = document.createElement("input")
-registerFormUsernameInput.type = "text"
-registerFormUsernameInput.id = "username"
-registerForm.appendChild(registerFormUsernameInput)
+        const usernameInput = new Input('text', 'username')
+        form.add(usernameInput)
 
-//////EMAIL
+        // password
+        const passwordLabel = new Label('password')
+        passwordLabel.setText('Password')
+        form.add(passwordLabel)
 
-var registerFormEmailLabel = document.createElement("label")
-registerFormEmailLabel.innerText = "E-mail"
-registerFormEmailLabel.htmlFor = "email"
-registerForm.appendChild(registerFormEmailLabel)
+        const passwordInput = new Input('password', 'password')
+        form.add(passwordInput)
 
-var registerFormEmailInput = document.createElement("input")
-registerFormEmailInput.type = "text"
-registerFormEmailInput.id = "email"///
-registerForm.appendChild(registerFormEmailInput)
+        // submitButton
+        const submitButton = new Button('submit')
+        submitButton.setText('Register')
+        form.add(submitButton)
 
-//////PASSWORD
+        // loginLink
+        const loginLink = new Link
+        loginLink.setText('Login')
+        this.add(loginLink)
 
-var registerFormPasswordLabel = document.createElement("label")
-registerFormPasswordLabel.innerText = "Password"
-registerFormPasswordLabel.htmlFor = "password"
-registerForm.appendChild(registerFormPasswordLabel)
+    }
 
-var registerFormPasswordInput = document.createElement("input")
-registerFormPasswordInput.type = "password"
-registerFormPasswordInput.id = "password"
-registerForm.appendChild(registerFormPasswordInput)
+    onLoginClick(callback) {                    //porque Login??
+        const loginLink = this.children[2]
 
-var registerFormSubmitButton = document.createElement("button")
-registerFormSubmitButton.type = "submit"
-registerFormSubmitButton.innerText = "Register"
-registerForm.appendChild(registerFormSubmitButton)
+        loginLink.addBehavior("click", event => {
+            event.preventDefault()
 
+            callback()
+        })
+    }
 
+    onRegistered(callback) {
+        const form = this.children[1]
 
-registerForm.onsubmit = function (event) { ///Define una función que se ejecutará al enviar el formulario "registerForm"
-    event.preventDefault()
+        form.addBehavior("submit", event => {
+            event.preventDefault()
 
-    var name = registerFormNameInput.value   // Obtiene el valor del campo de entrada "name" del formulario.
-    var email = registerFormEmailInput.value
-    var username = registerFormUsernameInput.value
-    var password = registerFormPasswordInput.value
+            const nameInput = form.children[1]
+            const emailInput = form.children[3]
+            const usernameInput = form.children[5]
+            const passwordInput = form.children[7]
 
-    try {                                               // Intenta ejecutar las siguientes instrucciones.
-        registerUser(name, email, username, password)   // Llama a la función `registerUser` para registrar al usuario con los valores obtenidos.
+            const name = nameInput.getValue()           //????
+            const email = emailInput.getValue()
+            const username = usernameInput.getValue()
+            const password = passwordInput.getValue()
 
-        registerForm.reset()
+            try {
+                logic.registerUser(name, email, username, password)     ////??
 
-        body.removeChild(registerView)
-        body.appendChild(loginView)
-    } catch (error) {                           // Captura cualquier error que haya ocurrido en el bloque "try" y ejecuta las instrucciones de manejo de errores.
-        alert(error.message)
+                form.clear()    //Limpia formulario ???
 
-        console.error(error)
+                callback()
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+
+        })
     }
 }
-
-//
-var registerLoginLink = document.createElement('a')
-registerLoginLink.href = ''
-registerLoginLink.innerText = 'Login'
-
-registerLoginLink.onclick = function (event) {
-    event.preventDefault()
-
-    body.removeChild(registerView)
-    body.appendChild(loginView)
-}
-registerView.appendChild(registerLoginLink)
