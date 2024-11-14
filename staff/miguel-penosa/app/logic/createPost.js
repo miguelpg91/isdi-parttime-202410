@@ -1,7 +1,7 @@
-(function () {
-    function createPost(iamge, text) {
-        if (typeof image !== "string") throw new Error("invalid image type")
-        if (typeof text !== "string") throw new Error("invalid text type")
+(function () {          //IIFE
+    function createPost(image, text) {
+        if (typeof image !== "string") throw Error("invalid image type")
+        if (typeof text !== "string") throw Error("invalid text type")
 
         var posts = JSON.parse(localStorage.posts)
 
@@ -20,5 +20,13 @@
         localStorage.posts = JSON.stringify(posts)   ///// Convierte el array `posts` nuevamente a una cadena JSON y lo guarda en `localStorage`
     }
 
-    logic.createPost = createPost  /// Asigna la función `createPost` al objeto `logic`, de modo que esté disponible globalmente en `logic`.
+    logic.createPost = createPost  /// Asigna la función `CreatePost` al objeto `logic`, de modo que esté disponible globalmente en `logic`.
 })()
+
+/*
+
+var validate = (function () {
+    // ...
+})();
+
+*/

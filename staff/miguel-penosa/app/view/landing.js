@@ -4,7 +4,7 @@ class Landing extends Component {       // Define una clase Landing que hereda d
 
         const title = new Heading(2)
         title.setText("Welcome")
-        this.add(title)     // this para manipular los elementos que pertenecen a esa instancia "Landing
+        this.add(title)     // this para manipular los elementos que pertenecen a esa instancia "Landing, un nuevo title, un intro, etc
 
         const intro = new Paragraph
         this.add(intro)
@@ -32,7 +32,7 @@ class Landing extends Component {       // Define una clase Landing que hereda d
     }
 
     onLoginClick(callback) {
-        const loginLink = this.children[1].this.children[2]    //el 2º hijo de la instancia  ... y el 3º de intro
+        const loginLink = this.children[1].children[2];  //el 2º hijo de la instancia Landing y el 3º de intro
 
         loginLink.addBehavior("click", event => {
             event.preventDefault()
@@ -42,8 +42,3 @@ class Landing extends Component {       // Define una clase Landing que hereda d
     }
 }
 
-
-
-/*this se refiere a la instancia de la clase Landing.
-Usas this para manipular los elementos que pertenecen a esa instancia, como agregar 
-un nuevo title, un intro, o manipular el comportamiento de los enlaces (click). */

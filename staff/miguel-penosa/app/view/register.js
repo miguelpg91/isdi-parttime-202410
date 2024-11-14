@@ -1,31 +1,28 @@
 class Register extends Component {
     constructor() {
-        super(document.createElement("main"))
+        super(document.createElement('main'))
 
         const title = new Heading(2)
-        title.setText("Register")
+        title.setText('Register')
         this.add(title)
 
         const form = new Form
         this.add(form)
 
-        // name
         const nameLabel = new Label('name')
         nameLabel.setText('Name')
         form.add(nameLabel)
 
-        const nameInput = new Input('text', 'name')
+        const nameInput = new Input('text')
         form.add(nameInput)
 
-        // email
         const emailLabel = new Label('email')
         emailLabel.setText('E-mail')
         form.add(emailLabel)
 
-        const emailInput = new Input('email', 'email')
+        const emailInput = new Input('email')
         form.add(emailInput)
 
-        // username
         const usernameLabel = new Label('username')
         usernameLabel.setText('Username')
         form.add(usernameLabel)
@@ -33,7 +30,6 @@ class Register extends Component {
         const usernameInput = new Input('text', 'username')
         form.add(usernameInput)
 
-        // password
         const passwordLabel = new Label('password')
         passwordLabel.setText('Password')
         form.add(passwordLabel)
@@ -41,22 +37,19 @@ class Register extends Component {
         const passwordInput = new Input('password', 'password')
         form.add(passwordInput)
 
-        // submitButton
         const submitButton = new Button('submit')
         submitButton.setText('Register')
         form.add(submitButton)
 
-        // loginLink
-        const loginLink = new Link
-        loginLink.setText('Login')
-        this.add(loginLink)
-
+        const registerLink = new Link
+        registerLink.setText('Login')
+        this.add(registerLink)
     }
 
-    onLoginClick(callback) {                    //porque Login??
+    onLoginClick(callback) {
         const loginLink = this.children[2]
 
-        loginLink.addBehavior("click", event => {
+        loginLink.addBehavior('click', event => {
             event.preventDefault()
 
             callback()
@@ -66,7 +59,7 @@ class Register extends Component {
     onRegistered(callback) {
         const form = this.children[1]
 
-        form.addBehavior("submit", event => {
+        form.addBehavior('submit', event => {
             event.preventDefault()
 
             const nameInput = form.children[1]
@@ -74,15 +67,15 @@ class Register extends Component {
             const usernameInput = form.children[5]
             const passwordInput = form.children[7]
 
-            const name = nameInput.getValue()           //????
+            const name = nameInput.getValue()
             const email = emailInput.getValue()
             const username = usernameInput.getValue()
             const password = passwordInput.getValue()
 
             try {
-                logic.registerUser(name, email, username, password)     ////??
+                logic.registerUser(name, email, username, password)
 
-                form.clear()    //Limpia formulario ???
+                form.clear()
 
                 callback()
             } catch (error) {
@@ -90,7 +83,6 @@ class Register extends Component {
 
                 console.error(error)
             }
-
         })
     }
 }

@@ -1,15 +1,15 @@
 var posts = []
 
 posts.push({
-    id: 'uuid()',   ////// Genera un ID único para el usuario usando la función uuid()
-    author: 'uuid()',   ///poner el username; 
+    id: uuid(),   ////// Genera un ID único para el usuario usando la función uuid()
+    author: 'm2w92r8h09',   ///poner el username; 
     image: 'https://spirit.scene7.com/is/image/Spirit/01642859-a?wid=400&qlt=85,1&resMode=bicub&fmt=jpeg&op_sharpen=1&hei=400',
     text: 'here me',
     date: new Date().toISOString()   ///enlaza al 
 })
 
 posts.push({
-    id: 'm2w92r8h44',
+    id: uuid(),
     author: 'm2w92r8h10',
     image: 'https://i.ytimg.com/vi/9oWEZSL_53U/maxresdefault.jpg',
     text: 'dream team',

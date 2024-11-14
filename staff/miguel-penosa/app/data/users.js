@@ -1,9 +1,7 @@
-//users//
-
 var users = []
 
 users.push({
-    id: uuid(),      // Genera un ID único para el usuario usando la función uuid()
+    id: "m2w92r8h09",      // Genera un ID único para el usuario usando la función uuid()
     name: 'michael jordan',
     email: 'airjordan@jordan.com',
     username: 'jordan23',
@@ -11,7 +9,7 @@ users.push({
 })
 
 users.push({
-    id: uuid(),
+    id: "m2w92r8h10",
     name: 'kobe bryant',
     email: 'kobe@bryant8.com',
     username: 'bryant8',

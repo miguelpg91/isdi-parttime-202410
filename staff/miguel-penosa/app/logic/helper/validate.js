@@ -1,4 +1,4 @@
-var validate = (function () {
+var validate = (function () {                // Define un objeto `validate` usando una IIFE (función que se ejecuta inmediatamente).
     function validateUsername(username) {
         if (typeof username !== 'string') throw new Error('invalid username type')
         if (username.length < 4) throw new Error('invalid username length')
@@ -20,7 +20,7 @@ var validate = (function () {
     }
 
     return {
-        username: validateUsername,
+        username: validateUsername,         // Devuelve un objeto con los validadores como métodos.
         password: validatePassword,
         name: validateName,
         email: validateEmail

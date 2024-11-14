@@ -1,20 +1,15 @@
 (function () {
     function getUserName() {
-        var users = JSON.parse(localStorage.users)      // Recupera la lista de usuarios almacenada en `localStorage` y la convierte de una cadena JSON a un array de objetos.
+        var users = JSON.parse(localStorage.users)
 
-        var user = users.find(funtion(user){
-            return user.id === sessionStorage.userId    // Busca en el array de `users` el usuario que coincida con el ID almacenado en `sessionStorage.userId`.
+        var user = users.find(function (user) {
+            return user.id === sessionStorage.userId
         })
 
-        if (!user) throw new Error("user not found");        // (si `user` es `undefined`), lanza un error indicando que no se encontró al usuario.
+        if (!user) throw new Error('user not found')
 
-
-        return user.name;       // Devuelve el nombre del usuario encontrado.
+        return user.name
     }
 
     logic.getUserName = getUserName
-})()   ///???   ; / Asigna la función `getUserName` al objeto global `logic`
-
-
-//El objeto logic es un contenedor donde se agrupan funciones de lógica, como getUserName,
-// para organizar mejor el código y evitar conflictos de nombres en el ámbito global.
+})()
