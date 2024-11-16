@@ -1,4 +1,4 @@
-const posts = []
+var posts = []
 
 posts.push({
     id: uuid(),   ////// Genera un ID único para el usuario usando la función uuid()

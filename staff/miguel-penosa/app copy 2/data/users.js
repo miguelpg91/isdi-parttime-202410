@@ -1,4 +1,4 @@
-const users = []
+var users = []
 
 users.push({
     id: "m2w92r8h09",      // Genera un ID único para el usuario usando la función uuid()
