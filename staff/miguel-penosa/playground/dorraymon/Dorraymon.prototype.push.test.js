@@ -10,7 +10,7 @@ function Dorraymon() {
 Dorraymon.prototype.push = function () {
     for (var i = 0; i < arguments.length; i++) {  // Corregido: usar punto y coma en el for
         var argument = arguments[i];
-        this[this.length] = argument;
+        this[this.length] = argument;       //??PORQUE THIS THIS.LENGTH
         this.length++;
     }
     return this.length;  // Retorna la nueva longitud
