@@ -9,7 +9,7 @@ class App extends Component {
 
         super(props)    //// Llama al constructor de la clase padre (Component) y pasa las props ????
 
-        this.state = { view: "landing" }
+        this.state = { view: "landing" }     // es donde se guarda la información que el componente necesita para funcionar. En este caso almacena cuál vista mostrar
     }
 
     // El método render define lo que se mostrará en pantalla
@@ -44,3 +44,17 @@ class App extends Component {
 
 // LNEA 24: Si el estado "view" es "home", renderiza el componente Home
 // LNEA 24: Pasa una función como prop onUserLoggedOut; cambia "view" a "login" cuando el usuario cierra sesión
+
+
+/*
+
+Componente Secundario	Props	Acción Asociada
+Landing	onRegisterClicked	Cambia la vista a "register".
+onLoginClicked	Cambia la vista a "login".
+Login	onRegisterClicked	Cambia la vista a "register".
+onUserLoggedIn	Cambia la vista a "home".
+Register	onLoginClicked	Cambia la vista a "login".
+onUserRegistered	Cambia la vista a "login".
+Home	onUserLoggedOut	Cambia la vista a "login".
+
+*/

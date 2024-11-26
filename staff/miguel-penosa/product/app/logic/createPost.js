@@ -1,8 +1,8 @@
-logic.createPost(image, text) => {
+logic.createPost = (image, text) => {
     if (typeof image !== "string") throw new Error("invalid image type")
     if (typeof text !== "string") throw new Error("invalid text type")
 
-    var posts = JSON.parse(localStorage.posts)
+    const posts = JSON.parse(localStorage.posts)
 
     // Crea un nuevo objeto `post` con las siguientes propiedades:
 
@@ -26,4 +26,4 @@ var validate = (function () {
     // ...
 })();
 
-*/
+*/ 

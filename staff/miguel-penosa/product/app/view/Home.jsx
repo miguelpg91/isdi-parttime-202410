@@ -35,7 +35,7 @@ class Home extends Component {
                 try {
                     logic.logoutUser()
 
-                    this.props.onUserLoggedOut()
+                    this.props.onUserLoggedOut()    ///para notificar al componente padre que el usuario ha cerrado sesión.
                 } catch (error) {
                     alert(error.message)
 
@@ -50,3 +50,8 @@ class Home extends Component {
         </main>
     }
 }
+
+/// LINEA 46 "+" cambia la vista del componente (view) a 'create-post'
+/// componentDidMount = Intenta obtener el nombre del usuario con logic.getUserName() y actualiza el estado name usando this.setState({ name }).
+/// el callback es la función this.props.onUserLoggedOut, y se utiliza para ejecutar una acción cuando el usuario cierra sesión.
+/// el callback le dice al componente padre que el usuario se ha deslogueado, y el padre puede tomar la acción correspondiente, como cambiar la vista a la pantalla de login.
