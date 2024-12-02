@@ -34,8 +34,6 @@ server.get("/register", (req, res) => {
 
                 <button type="submit">Register</button>
             </form>
-
-            <a href = "/login">Login </a>
         </body>
 
     </html>
@@ -80,8 +78,6 @@ server.get("/login", (req, res) => {        //GET /login: Si el usuario ya está
 
             <button type="submit">Login</button>
         </form>
-
-        <a href = "/register">Register </a>
     </body>
 </html>
 `)
