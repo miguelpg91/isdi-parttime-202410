@@ -1,3 +1,3 @@
-const uuid = () => (Date.now() + Math.random()).toString(36).replace("", "")
+const uuid = () => (Date.now() + Math.random()).toString(36).replace(".", "")
 
 module.exports = uuid

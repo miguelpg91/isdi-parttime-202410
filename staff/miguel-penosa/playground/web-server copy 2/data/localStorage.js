@@ -1,15 +1,15 @@
-const fs = require("fs")    // importa el módulo fs de Node.js, que permite interactuar con el sistema de archivos del servidor (leer, escribir, eliminar archivos,)
+const fs = require("fs")
 
 
 const localStorage = {
     get users() {   //ex: const.users = JSON.parse(localStorage.users)      //Lee el contenido del archivo users.json y devuelve string
-        const users = fs.readFileSync("./data/users.json", "utf8")      /// lee de manera sincrónica el contenido del archivo
+        const users = fs.readFileSync("./data/users.json", "utf8")
 
         return users
     },
 
     set users(users) { //ex: localStorage.users = JSON stringfy(users)       ///Recibe un string (datos en formato JSON). y lo guarda en users.json
-        fs.writeFileSync("./data/users.json", users)        /// escribe de manera sincrónica el valor recibido en el parámetro 
+        fs.writeFileSync("./data/users.json", users)
     }
 
 }

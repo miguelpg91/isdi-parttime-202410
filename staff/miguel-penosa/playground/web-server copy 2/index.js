@@ -4,25 +4,14 @@ const server = express()
 
 const logic = require("./logic/index")  //La ruta es relativa al archivo desde el que haces el require
 
-const { parseCookies } = require("./util/index")    ///parseCookies: Se usa para procesar las cookies enviadas en las solicitudes HTTP
-
 const PORT = 8080   ///define el puerto en el que el servidor escuchará las peticiones (8080 en este caso).
 
-server.get("/helloworld", (req, res) => {
-    res.send("Hello, from Server!")
-})
-
 server.get("/register", (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)    // Leer cookies para verificar si el usuario está logueado
-
-    const { userId } = cookies  // Si existe un userId en las cookies, significa que el usuario está logueado
-
-    if (userId) {
+    if (logic.isUserLoggedIn()) {               ////////Determina si un usuario está autenticado nos lleva a home
         res.redirect("/")
 
         return
-    }
-
+    }                                               ///form action: los datos del formulario se enviarán a la ruta "/login"
     res.send(`<doctype html>
     <html>
         <head>
@@ -35,13 +24,13 @@ server.get("/register", (req, res) => {
                 <input id="username" name="username" type="text">
 
                 <label for="name">Name</label>
-                <input id="name" name="name" type="text"/>
+                <input id="name" name="name" type="text">
 
                 <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" />     
+                <input id="email" name="email" type="email"      
 
                 <label for="password">Password</label>
-                <input id="password" name="password" type="password"/>
+                <input id="password" name="password" type="password"
 
                 <button type="submit">Register</button>
             </form>
@@ -68,15 +57,11 @@ server.post("/register", express.urlencoded({ extended: true }), (req, res) => {
 
 
 server.get("/login", (req, res) => {        //GET /login: Si el usuario ya está logueado (según la función isUserLoggedIn), se le redirige a la página de inicio (/).   //GET: para servir el formulario de registro. 
-    const cookies = parseCookies(req.headers.cookie)
-
-    const { userId } = cookies
-
-    if (userId) {
+    if (logic.isUserLoggedIn()) {           ////////Determina si un usuario está autenticado  ///Cuando el usuario hace clic en "Iniciar sesión", el servidor recibe la solicitud POST, ejecuta el código del callback, intenta autenticar al usuario y redirige o muestra un error 
         res.redirect("/")
 
-        return
-    }
+        return                                 //Detiene la ejecución de la función si las contraseñas no coinciden.
+    }                                         // Si no está logueado, muestra el formulario de login
 
     res.send(`<doctype html>                  
 <html>
@@ -108,9 +93,7 @@ server.post("/login", express.urlencoded({ extended: true }), (req, res) => {   
     const { username, password } = req.body
 
     try {
-        const userId = logic.authenticateUser(username, password)
-
-        res.setHeader("Set-Cookie", `userId=${userId}`)          // Establece la cookie "userId" para mantener al usuario logueado
+        logic.loginUser(username, password)      // Intenta autenticar al usuario con las credenciales
 
         res.redirect("/")
 
@@ -120,12 +103,8 @@ server.post("/login", express.urlencoded({ extended: true }), (req, res) => {   
 })
 
 server.get("/", (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)        // Obtiene las cookies del usuario
-
-    const { userId } = cookies      // Si el usuario no tiene userId en cookies, no está logueado
-
-    if (!userId) {
-        res.redirect("/login")
+    if (!logic.isUserLoggedIn()) {
+        res.redirect("/login")          // Si no está logueado, redirige a la página de login
 
         return
     }
@@ -133,7 +112,7 @@ server.get("/", (req, res) => {
     let name
 
     try {
-        name = logic.getUserName(userId)      // Intenta obtener el nombre del usuario
+        name = logic.getUserName()      // Intenta obtener el nombre del usuario
     } catch (error) {
         res.status(400).send(error.message)
 
@@ -159,13 +138,14 @@ server.get("/", (req, res) => {
 })
 
 server.post("/logout", (req, res) => {
-    const cookies = parseCookies(req.headers.cookie)    // Obtiene las cookies del usuario
+    try {
+        logic.logoutUser()      // Cierra la sesión del usuario
 
-    const { userId } = cookies  /// Obtiene el userId de las cookies para asegurarse de que existe
+        res.redirect("/login")          //redirige a la página de login
+    } catch (error) {
+        res.status(400).send(error.message)
 
-    res.setHeader("Set-Cookie", `userId= ${userId}; Max-age=0`) // Elimina la cookie 'userId' al establecer Max-Age a 0
-
-    res.redirect("/login")
+    }
 })
 
 server.listen(PORT, () => console.log(`server listening on port ${PORT}`))      //Hace que el servidor escuche las peticiones en el puerto 8080 y muestra un mensaje en la consola cuando el servidor está listo.
