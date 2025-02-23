@@ -20,6 +20,12 @@ const logic = {         ///objeto llamado logic que agrupa las tres funciones im
 
 export default logic
 
+/*
+
+El index.js actúa como la entrada principal de la lógica del sistema(LOGICA DE NEGOCIO)
+en tu archivo api, solo necesitas importar logic en lugar de cada archivo de lógica individualmente:
+
+*/
 
 
 

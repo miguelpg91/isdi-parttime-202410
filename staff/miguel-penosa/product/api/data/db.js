@@ -25,3 +25,14 @@ const db = {                ///Getter: Método que se utiliza para obtener datos
 
 export default db
 
+/*
+
+El getter lee el archivo JSON, lo convierte en un objeto JavaScript.
+El setter recibe un objeto JavaScript, lo convierte de nuevo a JSON y lo guarda en el archivo.
+
+
+-JSON es un string.
+-Puedes convertirlo a un objeto JavaScript con JSON.parse().
+-Y puedes convertirlo a string JSON con JSON.stringify().
+*/
+
