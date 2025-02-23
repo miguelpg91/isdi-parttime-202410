@@ -36,3 +36,9 @@ api.post("/users/auth", jsonBodyParser, (req, res) => {
     }
 })
 
+api.get("/users", (req, res) => {
+    try {
+        const userId = req.headers.authorization
+    }
+})
+
