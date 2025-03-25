@@ -1,4 +1,4 @@
-import validate from "./helper/validate"
+import validate from "./helper/validate.js"
 
 import db from "../data/db.js"
 import uuid from "../data/uuid.js"
