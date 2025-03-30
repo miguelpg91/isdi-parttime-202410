@@ -1,0 +1,129 @@
+/* Estilos globales para la aplicación */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    /* Fondo gris suave para la página */
+    color: #333;
+    /* Color de texto por defecto */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el contenedor de posts */
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que los posts se ajusten a nuevas filas cuando se llena una */
+    gap: 20px;
+    /* Espacio entre los posts */
+    margin-top: 20px;
+    justify-content: flex-start;
+}
+
+/* Estilo para cada tarjeta de post */
+.post-card {
+    background-color: #c8ccff !important;
+    /* Fondo de color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    /* Ancho fijo para cada tarjeta */
+    box-sizing: border-box;
+    /* Asegura que el padding no afecta al ancho total */
+}
+
+/* Estilo para la imagen del post */
+.post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    /* Mantiene la relación de aspecto */
+}
+
+/* Estilo para el contenido del post */
+.post-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Estilo para el título del post */
+.post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: left;
+    /* Título alineado a la izquierda */
+    color: #333;
+}
+
+/* Estilo para la descripción del post */
+.post-description {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Estilo para el autor del post */
+.post-author {
+    font-size: 0.9rem;
+    color: #999;
+    align-self: flex-start;
+    /* Autor alineado a la izquierda */
+}
+
+/* Estilo para el formulario */
+.post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    max-width: 500px;
+    /* Establecer un ancho máximo para el formulario */
+    margin: 0 auto;
+    /* Centrar el formulario */
+}
+
+/* Estilo para los inputs de texto y archivo */
+input[type="text"],
+input[type="file"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* Estilo para el botón */
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para la vista previa de la imagen */
+.preview-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
