@@ -1,0 +1,28 @@
+import authenticateUser from './authenticateUser.js'
+import getUserName from './getUserName.js'
+import registerUser from './registerUser.js'
+
+import getPosts from './getPosts.js'
+import createPost from './createPost.js'
+import deletePost from './deletePost.js'
+import toggleLikePost from './toggleLikePost.js'
+import updatePostText from './updatePostText.js'
+
+const logic = {
+    authenticateUser,
+    getUserName,
+    registerUser,
+
+    getPosts,
+    createPost,
+    deletePost,
+    toggleLikePost,
+    updatePostText
+}
+
+export default logic
+
+
+//Agrupa y exporta todas las funciones lógicas (autenticación, posts, etc.).
+
+//Hace que el código sea más limpio y fácil de mantener.
