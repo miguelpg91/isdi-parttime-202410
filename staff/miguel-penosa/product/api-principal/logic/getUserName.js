@@ -1,5 +1,5 @@
 import { User } from '../data/models.js'
-import { errors, validate } from 'com'
+import { validate, errors } from 'com'
 
 const { SystemError, NotFoundError } = errors
 
@@ -13,7 +13,6 @@ const getUserName = userId => {
 
             return user.name
         })
-
 }
 
 export default getUserName

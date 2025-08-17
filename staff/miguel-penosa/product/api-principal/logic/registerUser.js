@@ -19,7 +19,7 @@ const registerUser = (name, email, username, password) => {
                     if (error.code === 11000)
                         throw new DuplicityError('user already exists')
 
-                    throw new SystemError(error.message)                        PORQUE ESE THROW  Y PORQUE A ESA ALTURA ?
+                    throw new SystemError(error.message)                        //PORQUE ESE THROW  Y PORQUE A ESA ALTURA ?
                 })
         })
         .then(user => { })

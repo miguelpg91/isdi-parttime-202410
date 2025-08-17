@@ -4,7 +4,6 @@ import { validate, errors } from 'com'
 const { SystemError, NotFoundError } = errors
 
 const getPosts = userId => {
-
     validate.id(usserId, 'userId')
 
     return User.findById(userId)
@@ -25,10 +24,19 @@ const getPosts = userId => {
                             post.author.id = post.author._id.toString()
                             delete post.author._id                              //Borra el campo _id original porque ya tenemos su version limpia id
                         }
+
+                        post.own = userId === post.author.id
+
+                        post.liked = post.likes.some(userObjectId => userObjectId.toString() === userId)
+                        post.likes = post.likes.length
                     })
+
+                    return posts
                 })
         })
 }
+
+export default getPosts
 
 
 

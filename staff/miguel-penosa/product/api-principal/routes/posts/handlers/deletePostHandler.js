@@ -1,7 +1,7 @@
 import logic from '../../../logic/index.js'
 import jwt from 'jsonwebtoken'
 
-export default (req, res, next) {
+export default (req, res, next) => {
     try {
         const token = req.headers.authorization.slice(7)
 

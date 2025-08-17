@@ -1,5 +1,5 @@
-import logic from '../../../logic/updatePostText.js'
-import jwt from 'jswonwebtoken'
+import logic from '../../../logic/index.js'
+import jwt from 'jsonwebtoken'
 
 export default (req, res, next) => {
     try {

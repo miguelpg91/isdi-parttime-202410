@@ -7,7 +7,7 @@ import cors from 'cors'             //Permito que cualquier frontend (en cualqui
 import { usersRouter, postsRouter } from './routes/index.js'
 import errorHandler from './middlewares/errorHandler.js'
 
-const connectToDb = () => mongooose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'))  //Conecta con la base de datos
+const connectToDb = () => mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'))  //Conecta con la base de datos
 
 const startApi = () => {
     const api = express()       //Crea la app Express
