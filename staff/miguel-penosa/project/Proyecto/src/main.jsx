@@ -11,3 +11,6 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
+
+
+///Busca en tu index.html el elemento con id "root". Ese <div id="root"></div> es donde React “monta” la aplicación.

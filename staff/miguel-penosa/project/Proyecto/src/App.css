@@ -1,42 +1,174 @@
+/* Reseteo básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Body / contenedor principal */
+body,
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
+  background-image: url("/landscape-web.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Header */
+.header {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  height: 40px;
+  margin-right: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Botones de login y registro */
+.button-container {
+  display: flex;
+  margin-left: auto;
+  gap: 1rem;
 }
 
-.card {
-  padding: 2em;
+.button {
+  color: white;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  font-size: 16pt;
+  cursor: pointer;
 }
 
-.read-the-docs {
-  color: #888;
+.button.underline {
+  text-decoration: underline;
+}
+
+/* Main */
+.main {
+  padding: 18rem 2rem 2rem 10rem;
+}
+
+
+.subtitle {
+  font-size: 50pt;
+  font-weight: 600;
+  color: #05362e;
+  margin-bottom: 1rem;
+  background: transparent;
+}
+
+/* Formulario */
+.form {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-card {
+  display: flex;
+  /* Usa flexbox para organizar los elementos */
+  flex-direction: column;
+  /* Coloca los elementos en columna */
+  gap: 1.5rem;
+  /* Espacio entre los elementos del formulario */
+  margin: 0;
+  /* Elimina cualquier margen extra */
+  padding: 0;
+  /* Elimina el padding extra */
+}
+
+.field {
+  position: relative;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: white;
+  color: #053731;
+  outline: none;
+}
+
+.field label {
+  position: absolute;
+  left: 1.5rem;
+  top: 1rem;
+  color: #053731;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.field input:focus+label,
+.field input:not(:placeholder-shown)+label,
+.field select:focus+label,
+.field select:not([value=""])+label {
+  top: -0.6rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+  background: white;
+  padding: 0 0.3rem;
+}
+
+/* Botón de submit */
+.submit-button {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #359359;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #15803d;
+}
+
+.form-container {
+  padding: 20px;
+  /* Espacio interno dentro del recuadro */
+  background: white;
+  /* Fondo blanco */
+  border: 1px solid #ccc;
+  /* Borde gris claro */
+  border-radius: 8px;
+  /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
+  max-width: 600px;
+  /* Ancho máximo del formulario */
+  margin: 0 auto;
+  /* Centra el contenedor horizontalmente */
 }

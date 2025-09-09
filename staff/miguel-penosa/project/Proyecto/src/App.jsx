@@ -1,35 +1,93 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Logo from "./assets/react.svg";
+import "./App.css";
+import SearchForm from "./components/SearchForm";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [formType, setFormType] = useState(null);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <header className="header">
+        <div className="logo-container">
+          <a href="/" className="logo-button">
+            <img src={Logo} alt="Logo" className="logo" />
+          </a>
+          <h1 className="title">Tu Terreno</h1>
+        </div>
+        <div className="button-container">
+          <button
+            className={`button ${formType === "registro" ? "underline" : ""}`}
+            onClick={() => setFormType("registro")}
+          >
+            Registrarse
+          </button>
+          <button
+            className={`button ${formType === "login" ? "underline" : ""}`}
+            onClick={() => setFormType("login")}
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </header>
+
+      <main className="main">
+        <div className="bloque-izq">
+          <h2 className="subtitle">
+            Encuentra tu <br /> parcela ideal
+          </h2>
+        </div>
+
+        {/* Formulario de búsqueda */}
+        <SearchForm />
+
+        {/* Login o registro */}
+        {formType === "login" && <LoginForm />}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+/*
+
+        {formType === "registro" && <RegisterForm />}   //  Aquí defines onSuccess para que cambie el estado y oculte el formulario.
+
+
+
+-useState sirve para guardar información que puede cambiar(formulario: Register, login,..) y,
+cada vez que cambie, React vuelve a renderizar (actualizar) la pantalla automáticamente.
+
+
+  {formType === "login" && <LoginForm />} 
+
+
+*/
+
+
+/*
+
+
+    <div className="logo-container">
+          <Link to="/" className="logo-button">
+            <img src={Logo} alt="Logo" className="logo" />
+          </Link>
+
+
+
+
+ <main className="main">
+        <Routes>
+          <Route path="/" element={<SearchForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/registro" element={<RegisterForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+
+
+
+
+*/
