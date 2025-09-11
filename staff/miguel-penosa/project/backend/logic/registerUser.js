@@ -1,10 +1,10 @@
 import User from "../models/User.js"
-import { validate, errors } from "./com/index.js"           /// ??
+import { validate, errors } from "../com/index.js";         /// ??
 import bcrypt from "bcrypt"
 
 const { SystemError, DuplicityError } = errors
 
-export default async function registerUser = (name, email, username, password) => {
+export default async function registerUser(name, email, username, password) {
     validate.name(name)
     validate.email(email)
     validate.username(username)

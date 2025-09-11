@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api.js"
 
 function LoginForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         try {
             const user = await loginUser({ email, password })
             console.log("Usuario logeado:", user)
-            // Podrías guardar el token en localStorage y redirigir
+
+            localStorage.setItem("token", user.token);
+
+            // Solo aquí rediriges
+            navigate("/dashboard");
         } catch (error) {
             console.error(error.message)
         }

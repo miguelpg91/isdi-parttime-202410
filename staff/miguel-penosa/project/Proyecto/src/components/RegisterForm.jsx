@@ -13,6 +13,7 @@ function RegisterForm() {
             const newUser = await registerUser(formData)
             console.log("Usuario registrado:", newUser)
             ///if (onSuccess) onSuccess()   //onSuccess sirve para que el hijo (RegisterForm) le avise al padre (App) que todo salió bien, y el padre cambie el estado formType a null. Y por lo tanto se oculte el formulario
+            navigate("/login")
         } catch (error) {
             console.error(error.message)
         }

@@ -5,3 +5,5 @@ const logic = {
     authenticateUser,
     registerUser
 }
+
+export default logic

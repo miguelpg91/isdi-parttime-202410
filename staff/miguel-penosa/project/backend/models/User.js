@@ -25,6 +25,6 @@ const user = new Schema({
 
 const User = model('User', user)
 
-export {
+export default {
     User
 }

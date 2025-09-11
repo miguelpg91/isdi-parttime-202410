@@ -8,9 +8,11 @@ import mongoose from "mongoose";
 import usersRouter from "./routes/users/index.js";  // Importar routers
 import postsRouter from "./routes/posts/index.js";
 
-import { notFound, errorHandler } from "./middlewares/errorHandler.js"; // Importar middlewares de errores
+import errorHandler from "./middlewares/errorHandler.js"; // Importar middlewares de errores
 
 const app = express();
+
+console.log("MONGO_URL:", process.env.MONGO_URL);
 
 // Middleware global
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*", credentials: true }));
@@ -21,7 +23,11 @@ app.use("/api/users", usersRouter);     // /api no se incluye en la ruta final e
 app.use("/api/posts", postsRouter);
 
 // 404 + manejo de errores
-app.use(notFound);
+app.use((req, res, next) => {
+    const error = new Error(`Resource not found: ${req.originalUrl}`);
+    error.status = 404;
+    next(error);
+});
 app.use(errorHandler);
 
 // Conexión a MongoDB

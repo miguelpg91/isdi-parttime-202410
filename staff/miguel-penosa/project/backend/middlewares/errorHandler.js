@@ -1,8 +1,8 @@
-import { errors } from 'com'
+import { errors } from '../com/index.js'
 
 const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError, OwnershipError } = errors
 
-export default (error, req, res, next) => {
+const errorHandler = (error, req, res, next) => {
     if (error instanceof NotFoundError)
         res.status(404).json({ error: error.constructor.name, message: error.message })
     else if (error instanceof OwnershipError)
@@ -18,3 +18,5 @@ export default (error, req, res, next) => {
     else
         res.status(500).json({ error: SystemError.name, message: error.message })
 }
+
+export default errorHandler

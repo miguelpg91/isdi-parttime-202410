@@ -1,35 +1,25 @@
-import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import Logo from "./assets/react.svg";
 import "./App.css";
-import SearchForm from "./components/SearchForm";
+import SearchForm from "./components/SearchForm"
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import Dashboard from "./components/Dashboard"
 
 function App() {
-  const [formType, setFormType] = useState(null);
 
   return (
     <div>
       <header className="header">
         <div className="logo-container">
-          <a href="/" className="logo-button">
+          <Link to="/" className="logo-button">
             <img src={Logo} alt="Logo" className="logo" />
-          </a>
+          </Link>
           <h1 className="title">Tu Terreno</h1>
         </div>
         <div className="button-container">
-          <button
-            className={`button ${formType === "registro" ? "underline" : ""}`}
-            onClick={() => setFormType("registro")}
-          >
-            Registrarse
-          </button>
-          <button
-            className={`button ${formType === "login" ? "underline" : ""}`}
-            onClick={() => setFormType("login")}
-          >
-            Iniciar sesión
-          </button>
+          <Link to="/registro" className="button">Registrarse</Link>
+          <Link to="/login" className="button">Iniciar sesión</Link>
         </div>
       </header>
 
@@ -40,17 +30,21 @@ function App() {
           </h2>
         </div>
 
-        {/* Formulario de búsqueda */}
         <SearchForm />
 
-        {/* Login o registro */}
-        {formType === "login" && <LoginForm />}
+        <Routes>
+          <Route path="/registro" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
+
 
 /*
 
