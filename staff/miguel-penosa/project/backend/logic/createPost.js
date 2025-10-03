@@ -1,13 +1,17 @@
-import User from "../models/User.js"
+import Post from "../models/Post.js"
 import { validate, errors } from "../com/index.js"
 
 const { SystemError } = errors
 
+
+
 export default async function createPost(ciudad, text, precio, imagen, tipo, userId) {
     try {
-        validate.ciudad(ciudad)             /// FALTA DECLARAR ESOS CAMPOS ESPECIFICOS EN VALIDATE.JS
+        const numericPrecio = Number(precio)    ///cuando los datos vienen de un req.body todo es string asi que lo convertimos a un NUMBER
+
+        validate.ciudad(ciudad)
         validate.text(text)
-        validate.precio(precio)
+        validate.precio(numericPrecio)
         validate.imagen(imagen)
         validate.tipo(tipo)
         validate.id(userId)
@@ -15,10 +19,10 @@ export default async function createPost(ciudad, text, precio, imagen, tipo, use
         const post = await Post.create({
             ciudad,
             text,
-            precio,
+            precio: numericPrecio,
             imagen,
             tipo,
-            user: userId    ///user: la clave que espera tu base de datos  y userId : es la variable que tienes en tu función
+            author: userId    ///user: la clave que espera tu base de datos  y userId : es la variable que tienes en tu función
         })
 
         return post

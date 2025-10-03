@@ -4,12 +4,12 @@ import bcrypt from "bcrypt"
 
 const { SystemError, CredentialsError } = errors
 
-export default async function authenticateUser(username, password) {
+export default async function authenticateUser(email, password) {
     try {
-        validate.username(username)
+        validate.email(email)
         validate.password(password)
 
-        const user = await User.findOne({ username })
+        const user = await User.findOne({ email })
         if (!user) throw new CredentialsError("Usuario no encontrado")
 
         const isMatch = await bcrypt.compare(password, user.password)

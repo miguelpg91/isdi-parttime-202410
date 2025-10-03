@@ -5,8 +5,8 @@ export default async function authenticateUserHandler(req, res, next) {
     try {
         const { email, password } = req.body
 
-        const userId = await logic.authenticateUser(email, password)
-        const payload = { sub: userId }
+        const user = await logic.authenticateUser(email, password)
+        const payload = { sub: user._id }
         const token = jwt.sign(payload, process.env.JWT_SECRET)
 
         res.json({ token })

@@ -1,11 +1,10 @@
 import User from "../models/User.js"
-import { validate, errors } from "../com/index.js";         /// ??
+import { validate, errors } from "../com/index.js"
 import bcrypt from "bcrypt"
 
 const { SystemError, DuplicityError } = errors
 
-export default async function registerUser(name, email, username, password) {
-    validate.name(name)
+export default async function registerUser(email, username, password) {
     validate.email(email)
     validate.username(username)
     validate.password(password)
@@ -13,7 +12,7 @@ export default async function registerUser(name, email, username, password) {
     try {
         const hash = await bcrypt.hash(password, 10)
         try {
-            const user = await User.create({ name, email, username, password: hash })
+            const user = await User.create({ email, username, password: hash })
             return user
         } catch (error) {
             if (error.code === 11000)
@@ -25,6 +24,13 @@ export default async function registerUser(name, email, username, password) {
     }
 }
 
+/*
+ "username": "miguel_123",  // minúsculas, números, guion o guion bajo, hasta 30
+  "email": "miguel@test.com", // email válido
+  "password": "abc12345" 
+
+
+*/
 
 
 /*

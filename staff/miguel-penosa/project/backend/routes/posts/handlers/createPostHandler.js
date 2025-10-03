@@ -1,21 +1,24 @@
-import logic from "../../../logic/index.js"
+import logic from "../../../logic/index.js";
 
-export default async function createPostHandler(req, res, next) {
+// Handler sin multer
+export const createPostHandler = async (req, res, next) => {
     try {
-        const { ciudad, text, precio, imagen, tipo } = req.body
-
-        const { userId } = req
+        // recibes todo del body en JSON
+        const { ciudad, text, precio, tipo, userId, imagen } = req.body;
 
         const newPost = await logic.createPost(
             ciudad,
             text,
             Number(precio),
-            imagen,
+            imagen, // aquí es string URL
             tipo,
             userId
-        )
-    } catch (error) {
-        next(error.message)
-    }
-}
+        );
 
+        res.status(201).json(newPost);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export default createPostHandler;

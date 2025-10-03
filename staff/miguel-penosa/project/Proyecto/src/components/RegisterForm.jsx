@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { registerUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
     const [formData, setFormData] = useState({
-        nombre: "",
+        username: "",
         email: "",
         password: "",
     })
+
+    const [message, setMessage] = useState("")
+    const navigate = useNavigate()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const newUser = await registerUser(formData)
             console.log("Usuario registrado:", newUser)
+            setMessage("Te has registrado exitosamente")
             ///if (onSuccess) onSuccess()   //onSuccess sirve para que el hijo (RegisterForm) le avise al padre (App) que todo salió bien, y el padre cambie el estado formType a null. Y por lo tanto se oculte el formulario
             navigate("/login")
         } catch (error) {
-            console.error(error.message)
+            console.error(error)
+            setMessage("Hubo error al registrarte")
         }
     }
 
@@ -30,12 +37,12 @@ function RegisterForm() {
                         type="text"
                         required
                         placeholder=" "
-                        value={formData.nombre}
+                        value={formData.username}
                         onChange={(e) =>
-                            setFormData({ ...formData, nombre: e.target.value })
+                            setFormData({ ...formData, username: e.target.value })
                         }
                     />
-                    <label>Nombre</label>
+                    <label>username</label>
                 </div>
                 <div className="field">
                     <input
@@ -63,6 +70,7 @@ function RegisterForm() {
                 </div>
                 <button type="submit" className="submit-button">Registrarse</button>
             </form>
+            {message && <p className="succes-message">{message}</p>}
         </div>
     );
 }

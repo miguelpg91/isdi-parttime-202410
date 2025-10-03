@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api.js"
 
-function LoginForm() {
+function LoginForm({ setLoggedIn }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+    const navigate = useNavigate()                  ///useNavigate es un hook de React Router convertido a funcion
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -14,10 +14,10 @@ function LoginForm() {
             const user = await loginUser({ email, password })
             console.log("Usuario logeado:", user)
 
-            localStorage.setItem("token", user.token);
-
+            localStorage.setItem("token", user.token);      ////Almacena el token del usuario en el navegador                    user.token → es la propiedad token del objeto user ; "token" → es solo el nombre bajo el que guardas ese valor en localStorage
+            setLoggedIn(true)
             // Solo aquí rediriges
-            navigate("/dashboard");
+            navigate("/dashboard");         ///Navigate para redirigir al panel de Usuario
         } catch (error) {
             console.error(error.message)
         }
@@ -52,3 +52,12 @@ function LoginForm() {
 }
 
 export default LoginForm
+
+
+/*
+localStorage.setItem("clave", "valor") → guarda un valor en el almacenamiento.
+
+localStorage.getItem("clave") → lee un valor que ya está guardado.
+
+
+*/

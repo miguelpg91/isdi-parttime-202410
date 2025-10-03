@@ -1,16 +1,20 @@
-import logic from "../../../logic/index.js"
-import jwt from "jsonwebtoken"
+import logic from "../../../logic/index.js";
+import jwt from "jsonwebtoken";
 
 export default async function registerUserHandler(req, res, next) {
     try {
-        const { email, password } = req.body
-        const userId = await logic.registerUser(username, email, password)
-        const payload = { sub: userId }
-        const token = jwt.sign(payload, process.env.JWT_SECRET)
+        // ahora desestructuramos igual que el frontend envía
+        const { email, username, password } = req.body;
 
-        res.json({ token })
+        // y llamamos a registerUser con los mismos parámetros
+        const user = await logic.registerUser(email, username, password);
 
+        // puedes usar el id del user creado para el token
+        const payload = { sub: user._id.toString() };
+        const token = jwt.sign(payload, process.env.JWT_SECRET);
+
+        res.json({ token, user });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }

@@ -1,25 +1,24 @@
-//Este código es el primer paso para enviar los datos recogidos al backend y el ultimo ya que los devuelve a los componentes
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";    // ??
 
 
-// ---- REGISTRO ----
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
-export async function registerUser(nombre, email, password) {
-    const res = await fetch(`${API_URL}/users`, {
+
+
+
+export async function registerUser(formData) {
+    const res = await fetch(`${API_URL}/api/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, password })
+        body: JSON.stringify(formData)
     })
     if (!res.ok) throw new Error("Error en registro")
     return await res.json()
 }
 
 
-// ---- LOGIN ----
 
-export async function loginUser(email, password) {              //// Tomas un objeto JavaScript con los datos del post
-    const res = await fetch(`${API_URL}/auth`, {
+export async function loginUser({ email, password }) {              //// Tomas un objeto JavaScript con los datos del post
+    const res = await fetch(`${API_URL}/api/users/auth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },        //  Para que lea el JSON
         body: JSON.stringify({ email, password })               ////  Lo conviertes a texto JSON para enviarlo al servidor
@@ -28,30 +27,76 @@ export async function loginUser(email, password) {              //// Tomas un ob
     return await res.json()                                     ////  conviertes ese JSON de vuelta a un objeto JavaScript    
 }
 
-// ---- POSTS ----
 
-export async function createPost(tipo, ciudad, precio, text, userId) {
-    const res = await fetch(`${API_URL}/posts`, {
+
+export async function createPost(postData) {
+    const res = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tipo, ciudad, precio, text, author: userId })
+        body: JSON.stringify(postData)
     })
     if (!res.ok) throw new Error("Error creando el post")
     return await res.json()
 }
 
 
+export async function getPosts() {
+    const res = await fetch(`${API_URL}/api/posts`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
+    if (!res.ok) throw new Error("Error obteniendo los posts")
+    return await res.json()
+}
+
+export async function deletePost(id) {
+    const token = localStorage.getItem("token")
+    const res = await fetch(`${API_URL}/api/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    if (!res.ok) throw new Error("Error borrando post")
+    return await res.json()
+}
+
+export async function editPost(id, formData) {
+    const token = localStorage.getItem("token")
+    const res = await fetch(`${API_URL}/api/posts/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+
+        },
+        body: JSON.stringify(formData)
+    })
+    if (!res.ok) throw new Error("Error editando post")
+    return await res.json()
+}
+
+
+
 
 // ---- BUSCAR ----
 
-export async function searchLands(tipo, ciudad, precio) {
-    const res = await fetch(`${API_URL}/search`, {
+export async function searchPost({ tipo, ciudad, precio }) {
+    const params = new URLSearchParams();
+    if (tipo) params.append("tipo", tipo);
+    if (ciudad) params.append("ciudad", ciudad);
+    if (precio) params.append("precio", precio);
+
+    const res = await fetch(`${API_URL}/api/posts/search?${params.toString()}`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tipo, ciudad, precio })
-    })
-    if (!res.ok) throw new Error("Error buscando terrenos")
-    return await res.json()
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!res.ok) throw new Error("Error buscando terrenos");
+    return await res.json();
 }
 
 /// Se hace la solicitud (fetch) y el código se "pausa" con await hasta que obtenga la respuesta.

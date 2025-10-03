@@ -1,8 +1,18 @@
 import { errors } from '../com/index.js'
 
-const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError, OwnershipError } = errors
+const {
+    ValidationError,
+    SystemError,
+    DuplicityError,
+    CredentialsError,
+    NotFoundError,
+    OwnershipError,
+} = errors
 
 const errorHandler = (error, req, res, next) => {
+    // 🔹 añade un console.error para ver el error completo en consola
+    console.error('🔥 ERROR:', error)
+
     if (error instanceof NotFoundError)
         res.status(404).json({ error: error.constructor.name, message: error.message })
     else if (error instanceof OwnershipError)

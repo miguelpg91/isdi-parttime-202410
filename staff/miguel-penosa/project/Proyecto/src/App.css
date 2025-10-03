@@ -1,4 +1,6 @@
-/* Reseteo básico */
+/* -------------------------
+   RESET BÁSICO
+-------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -6,18 +8,119 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Body / contenedor principal */
-body,
-#root {
+body {
   min-height: 100vh;
-  background-color: transparent;
-  background-image: url("/landscape-web.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url("/landscape-web2.jpg") center/cover no-repeat;
+  padding: 0 400px;
 }
 
-/* Header */
+header {
+  background-color: #15803d;
+}
+
+
+.bloque-izq {
+  padding-right: 20px;
+}
+
+/* -------------------------
+   ROOT / CONTENEDOR PRINCIPAL
+-------------------------- */
+#root,
+main,
+.dashboard-container {
+  /*margin: 0px auto; */
+  /* centra horizontalmente */
+  padding: 40px;
+  /*margin-left: 100px;*/
+  background: transparent;
+}
+
+/* -------------------------
+   DASHBOARD / COLUMNA & CONTENIDO
+-------------------------- */
+.dashboard-container {
+  background: transparent;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: center;
+  /* centra columnas */
+  gap: 3rem;
+  /* espacio entre columnas */
+  max-width: 1200px;
+  /* ancho máximo */
+  margin: 0 auto;
+  /* centra bloque */
+  padding: 2rem;
+  align-items: flex-start;
+}
+
+.dashboard-content form {
+  flex: 1;
+  min-width: 350px;
+  /* ancho mínimo del formulario */
+}
+
+.posts-list {
+  flex: 2;
+  min-width: 500px;
+  /* ancho mínimo de la lista */
+  margin-left: 256px;
+  margin-top: 0;
+}
+
+/* -------------------------
+   POST CARD
+-------------------------- */
+.post-card {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: black;
+}
+
+.post-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.post-card p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* -------------------------
+   POST INFO TEXT
+-------------------------- */
+.city {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.tipo {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.precio {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* -------------------------
+   HEADER
+-------------------------- */
 .header {
   padding: 1rem 2rem;
   display: flex;
@@ -34,11 +137,14 @@ body,
   align-items: center;
 }
 
-.logo {
-  height: 40px;
-  margin-right: 1rem;
+.logo-container h1 {
+  font-size: 2.2em;
 }
 
+.logo {
+  height: 80px;
+  margin-right: 1rem;
+}
 
 .title {
   font-size: 1.25rem;
@@ -46,11 +152,13 @@ body,
   color: white;
 }
 
-/* Botones de login y registro */
+/* Botones login / registro */
 .button-container {
   display: flex;
   margin-left: auto;
-  gap: 1rem;
+  gap: 6rem;
+  margin-right: 40px;
+
 }
 
 .button {
@@ -62,15 +170,23 @@ body,
   cursor: pointer;
 }
 
+.button:hover {
+  color: black;
+}
+
 .button.underline {
   text-decoration: underline;
 }
 
-/* Main */
-.main {
-  padding: 18rem 2rem 2rem 10rem;
-}
 
+/* -------------------------
+   MAIN / SUBTITLES
+-------------------------- */
+.main {
+
+  background-color: white;
+  border-radius: 14px;
+}
 
 .subtitle {
   font-size: 50pt;
@@ -80,27 +196,52 @@ body,
   background: transparent;
 }
 
-/* Formulario */
-.form {
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+
+
+.posts-overlay {
+  position: fixed;
+  /* para que quede fuera del flujo del container */
+  top: 353px;
+  right: 0;
+  margin-right: 400px;
+  /* se abre desde la derecha */
+  /*width: 400px; */
+  /* ancho del panel */
+  height: 100vh;
+  /* altura completa de la pantalla */
+  /*background: #fff;*/
+  /*box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);*/
+  overflow-y: auto;
+  /* scroll si hay muchos posts */
+  padding: 20px;
+  z-index: 1000;
+  /* encima de todo */
 }
 
-.form-card {
+.posts-overlay h2 {
+  margin-top: 0;
+}
+
+
+
+
+
+/* -------------------------
+   FORMULARIOS
+-------------------------- */
+.form,
+.form-card,
+.form-container {
   display: flex;
-  /* Usa flexbox para organizar los elementos */
   flex-direction: column;
-  /* Coloca los elementos en columna */
   gap: 1.5rem;
-  /* Espacio entre los elementos del formulario */
-  margin: 0;
-  /* Elimina cualquier margen extra */
-  padding: 0;
-  /* Elimina el padding extra */
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .field {
@@ -127,7 +268,7 @@ body,
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.2s ease;
-  background: transparent;
+  background: white;
 }
 
 .field input:focus+label,
@@ -141,7 +282,7 @@ body,
   padding: 0 0.3rem;
 }
 
-/* Botón de submit */
+/* Botón submit */
 .submit-button {
   padding: 1rem;
   border: none;
@@ -153,23 +294,82 @@ body,
   transition: background 0.2s ease;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.edit-post-form button[type="submit"]:hover {
   background-color: #15803d;
 }
 
-.form-container {
+
+/* -------------------------
+   TEXTOS / COLORES
+-------------------------- */
+.text-createpost {
+  color: #05362e;
+}
+
+/* Contenedor principal del formulario de editar post */
+.edit-post-form {
+  max-width: 400px;
+  margin: 30px auto;
   padding: 20px;
-  /* Espacio interno dentro del recuadro */
-  background: white;
-  /* Fondo blanco */
-  border: 1px solid #ccc;
-  /* Borde gris claro */
+  background: #ffffff;
   border-radius: 8px;
-  /* Bordes redondeados */
+  border: 1px solid #ccc;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Sombra suave */
-  max-width: 600px;
-  /* Ancho máximo del formulario */
-  margin: 0 auto;
-  /* Centra el contenedor horizontalmente */
+}
+
+.edit-post-form {
+  color: #05362e;
+}
+
+/* Etiquetas de los campos del formulario */
+.edit-post-form label {
+  display: block;
+  color: #05362e;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Inputs y selects dentro del formulario */
+.edit-post-form input,
+.edit-post-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background: white;
+  color: grey;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botones generales dentro del formulario */
+.edit-post-form button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Botón de enviar formulario (submit) */
+.edit-post-form button[type="submit"] {
+  background-color: #359359;
+  /* verde */
+  color: white;
+  /* texto blanco */
+}
+
+/* Botón de cancelar (button) */
+.edit-post-form button[type="button"] {
+  background-color: #ccc;
+  /* gris */
+  color: black;
+  /* texto negro */
+  margin-left: 10px;
+  /* separación respecto al submit */
+}
+
+.form-title {
+  color: black;
 }

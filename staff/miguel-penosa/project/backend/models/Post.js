@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const { Schema, model, Types: { ObjectId } } = mongoose
 
-const post = new Schema({
+const postSchema = new Schema({
     author: {
         type: ObjectId,
         ref: 'User',
@@ -31,12 +31,10 @@ const post = new Schema({
     },
     precio: {
         type: Number,
-        required: true
+        required: true,
     }
 })
 
-const Post = model('Post', post)
+const Post = model('Post', postSchema)
 
-export {
-    Post
-}
+export default Post
