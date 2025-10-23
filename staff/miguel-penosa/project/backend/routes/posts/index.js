@@ -13,7 +13,7 @@ router.post("/", jsonBodyParser, createPostHandler)
 router.get("/", jsonBodyParser, getPostsHandler)
 router.delete("/:id", authMiddleware, deletePostHandler)
 router.get("/search", searchPostHandler)
-router.put("/:id", authMiddleware, editPostHandler)
+router.put("/:id", authMiddleware, jsonBodyParser, editPostHandler)     /// Lleva ambos middlewares porque necesita el token para tener acceso y parsear la peticion
 
 
 

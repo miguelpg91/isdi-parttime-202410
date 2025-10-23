@@ -2,9 +2,9 @@ import 'dotenv/config'
 import { expect } from 'chai'
 
 import mongoose from 'mongoose'
-import User from '../models/User.js'
+import { User } from '../data/models.js'
 
-import authenticateUser from '../logic/authenticateUser.js'
+import authenticateUser from './authenticateUser.js'
 
 import { errors } from '../com/index.js'
 const { CredentialsError } = errors
@@ -18,16 +18,19 @@ describe('authenticateUser', () => {
 
     it('succeeds on existing user', () => {
         return bcrypt.hash('123123123', 10)
-            .then(hash => User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: hash }))
+            .then(hash => User.create({
+                name: 'Pepito Grillo',
+                email: 'pepito@grillo.com',
+                username: 'pepitogrillo',
+                password: hash
+            }))
             .then(() => authenticateUser('pepitogrillo', '123123123'))
             .then(userId => {
-                expect(userId).to.be.a.string
-
+                expect(userId).to.be.a('string')
                 return User.findById(userId)
             })
             .then(user => {
                 expect(user.username).to.equal('pepitogrillo')
-
                 return bcrypt.compare('123123123', user.password)
             })
             .then(match => expect(match).to.be.true)
@@ -37,7 +40,12 @@ describe('authenticateUser', () => {
         let catchedError
 
         return bcrypt.hash('123123123', 10)
-            .then(hash => User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: hash }))
+            .then(hash => User.create({
+                name: 'Pepito Grillo',
+                email: 'pepito@grillo.com',
+                username: 'pepitogrillo',
+                password: hash
+            }))
             .then(() => authenticateUser('pepitogrill', '123123123'))
             .catch(error => catchedError = error)
             .finally(() => {
@@ -50,7 +58,12 @@ describe('authenticateUser', () => {
         let catchedError
 
         return bcrypt.hash('123123123', 10)
-            .then(hash => User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: hash }))
+            .then(hash => User.create({
+                name: 'Pepito Grillo',
+                email: 'pepito@grillo.com',
+                username: 'pepitogrillo',
+                password: hash
+            }))
             .then(() => authenticateUser('pepitogrillo', '12312312'))
             .catch(error => catchedError = error)
             .finally(() => {

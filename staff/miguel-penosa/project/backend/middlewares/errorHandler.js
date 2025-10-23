@@ -11,10 +11,10 @@ const {
 
 const errorHandler = (error, req, res, next) => {
     // 🔹 añade un console.error para ver el error completo en consola
-    console.error('🔥 ERROR:', error)
+    console.error(' ERROR:', error)
 
     if (error instanceof NotFoundError)
-        res.status(404).json({ error: error.constructor.name, message: error.message })
+        res.status(404).json({ error: error.constructor.name, message: error.message })     ///instance?? error.constructor.name??
     else if (error instanceof OwnershipError)
         res.status(403).json({ error: error.constructor.name, message: error.message })
     else if (error instanceof CredentialsError)

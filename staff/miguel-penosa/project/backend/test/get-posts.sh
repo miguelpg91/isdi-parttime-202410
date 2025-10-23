@@ -1,0 +1,1 @@
+curl -X GET -H "Content-Type: application/json" -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGUxYzAxNzIxMzZkNmVkN2U5ODc2MjgiLCJpYXQiOjE3NTk2MjUyMzl9.aOxTjBHJdHk7lTPAQVg5DkW01sH4UL-QJWUNlGjHG2s' http://localhost:4000/api/posts -v

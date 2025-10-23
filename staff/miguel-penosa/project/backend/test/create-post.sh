@@ -1,0 +1,2 @@
+curl -X POST -H "Content-Type: application/json" -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OGUxYzAxNzIxMzZkNmVkN2U5ODc2MjgiLCJpYXQiOjE3NTk2MjUyMzl9.aOxTjBHJdHk7lTPAQVg5DkW01sH4UL-QJWUNlGjHG2s' -d '{"ciudad":"Madrid", "text":"Hola soy...","precio": 5000, "imagen":"http://example.com/terreno.jpg", "tipo":"Industrial", "userId":"68e1c0172136d6ed7e987628" }' http://localhost:4000/api/posts -v
+
