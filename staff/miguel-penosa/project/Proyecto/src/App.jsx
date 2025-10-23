@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
-import "./App.css";
+import "./App.css";                                                   /// ??????? PORQUE NO IMPORTA EL INDEX.CSS TAMBIEN
 import { useState, useEffect } from "react";
 import SearchForm from "./components/SearchForm.jsx"
 import LoginForm from "./components/LoginForm.jsx";

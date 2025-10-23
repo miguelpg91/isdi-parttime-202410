@@ -78,7 +78,7 @@ function Dashboard({ loggedIn, setLoggedIn }) {
 
     return (
         <>
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />      {/*Este componente sobreescribe el header que tenemos en App.jsx y que está fuera del Routes para que sea visible siempre */}
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />      {/*Este componente sobreescribe el header que tenemos en App.jsx el cual está fuera del Routes para que sea visible siempre */}
             <div className="dashboard-container">
                 <h1>Panel de Usuario</h1>
 
