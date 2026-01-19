@@ -5,18 +5,19 @@ const { SystemError } = errors
 
 
 
-export default async function createPost(ciudad, text, precio, imagen, tipo, userId) {
+export default async function createPost(userId, data) {
     try {
+        const { ciudad, text, precio, imagen, tipo } = data
         const numericPrecio = Number(precio)    ///cuando los datos vienen de un req.body todo es string asi que lo convertimos a un NUMBER
 
-        validate.ciudad(ciudad)
+        validate.ciudad(ciudad)     //Acceder al método ciudad del objeto validate y ejecutarlo pasando la variable (ciudad)
         validate.text(text)
         validate.precio(numericPrecio)
         validate.imagen(imagen)
         validate.tipo(tipo)
         validate.id(userId)
 
-        const post = await Post.create({
+        const post = await Post.create({    ///// post._id  : El id del post lo genera MongoDB al guardar el documento
             ciudad,
             text,
             precio: numericPrecio,
@@ -31,3 +32,7 @@ export default async function createPost(ciudad, text, precio, imagen, tipo, use
         throw new SystemError(error.message)
     }
 }
+
+
+
+///

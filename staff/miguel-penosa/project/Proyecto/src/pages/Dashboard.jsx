@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { getPosts, deletePost } from "../services/api.js";
-import CreatePostForm from "./CreatePostForm.jsx";
-import EditPostForm from "./EditPostForm.jsx"
-import Header from "./Header.jsx";
+import CreatePostForm from "../components/CreatePostForm.jsx";
+import EditPostForm from "../components/EditPostForm.jsx"
+import Header from "../components/Header.jsx";
 
 // Helper para extraer userId del token
 function getUserIdFromToken() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");        /// Obtienes token que te devolvió el backend al hacer login
     if (!token) return null;
     try {
-        const payload = token.split(".")[1];    /// Se compone de HEADER.PAYLOAD.SIGNATURE, lo divide en un array de 3 y toma la 2ª parte.
-        const json = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));   ///obtienes el objeto con los datos del usuario (id, email,..)
-        return json.sub || null;
+        const payload = token.split(".")[1];                                            /// Token se compone de HEADER.PAYLOAD.SIGNATURE, lo divide en un array de 3 y toma la 2ª parte(payload). /// (".") Separa cada punto
+        const json = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));   ///atob convierte Base64URL a string y JSON.parse lo convierte en un objeto JS con los datos del token (sub=userId, iat, exp)
+        return json.sub || null;                                                          //Devuelve el userId (campo sub).
     } catch (error) {
         console.log(error.message);
         return null;
@@ -26,7 +26,7 @@ function Dashboard({ loggedIn, setLoggedIn }) {
 
     const userId = getUserIdFromToken();
 
-    useEffect(() => {
+    useEffect(() => {                               ////porque useeffect?????
         if (!userId) {
             setLoading(false);
             setError("Usuario no autenticado");
@@ -43,7 +43,7 @@ function Dashboard({ loggedIn, setLoggedIn }) {
                     (p) =>                                                                          /// (p) = posts
                         p.author === userId ||                                                    ///   author es directamente userId                      
                         (p.author && (p.author._id === userId || p.author === userId))          // Si p.author existe y además p.author._id === userId o p.author === userId (según cómo venga)
-                );
+                );                               /// userId vive en todo el docu???????
 
                 setPosts(myPosts);              // guardamos los posts filtrados en el estado
             } catch (error) {
@@ -58,10 +58,10 @@ function Dashboard({ loggedIn, setLoggedIn }) {
     }, [userId]);           // este efecto se dispara cuando userId cambia
 
     // Borrar post
-    const handleDelete = async (id) => {
+    const handleDelete = async (id) => {    // id del post
         try {
             await deletePost(id);
-            setPosts((prev) => prev.filter((p) => p._id !== id));       /// prev ???
+            setPosts((prev) => prev.filter((p) => p._id !== id));       /// prev y p que es ???
         } catch (error) {
             console.error(error);
             setError("Error borrando post");
@@ -91,11 +91,11 @@ function Dashboard({ loggedIn, setLoggedIn }) {
                                 post={editingPost}
                                 onPostUpdated={(updated) => {
                                     setPosts((prev) =>
-                                        prev.map((p) => (p._id === updated._id ? updated : p))  ///???
+                                        prev.map((p) => (p._id === updated._id ? updated : p))  ///??????
                                     );
                                     setEditingPost(null);
                                 }}
-                                onCancel={() => setEditingPost(null)}  ///que es esta inea????
+                                onCancel={() => setEditingPost(null)}  ///??????
                             />
                         )}
 

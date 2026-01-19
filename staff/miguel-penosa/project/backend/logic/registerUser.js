@@ -10,7 +10,7 @@ export default async function registerUser(email, username, password) {
     validate.password(password)
 
     try {
-        const hash = await bcrypt.hash(password, 10)
+        const hash = await bcrypt.hash(password, 10)   ///transforma la contraseña en una cadena irreconocible (10 vueltas)
         try {
             const user = await User.create({ email, username, password: hash })
             return user

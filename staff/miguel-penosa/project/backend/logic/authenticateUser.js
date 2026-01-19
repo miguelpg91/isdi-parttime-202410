@@ -12,7 +12,7 @@ export default async function authenticateUser(email, password) {
         const user = await User.findOne({ email })
         if (!user) throw new CredentialsError("Usuario no encontrado")
 
-        const isMatch = await bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, user.password)   /// Internamente hashea la contraseña recibida(password) y la compara con la de la DB
         if (!isMatch) throw new CredentialsError("Contraseña no coincide")
 
         return user

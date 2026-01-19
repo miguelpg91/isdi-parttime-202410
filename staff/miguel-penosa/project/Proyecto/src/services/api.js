@@ -3,7 +3,7 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 
-
+///ENDPOINTS
 
 export async function registerUser(formData) {
     const res = await fetch(`${API_URL}/api/users`, {
@@ -32,8 +32,11 @@ export async function loginUser({ email, password }) {              //// Tomas u
 export async function createPost(postData) {
     const res = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(postData)
+        headers: {
+            "Content-Type": "application/json",    /// Le dices al servidor qué tipo de datos vas a enviar: JSON
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(postData)                      /// Convierte un objeto JavaScript en texto JSON
     })
     if (!res.ok) throw new Error("Error creando el post")
     return await res.json()
@@ -83,12 +86,12 @@ export async function editPost(id, formData) {
 // ---- BUSCAR ----
 
 export async function searchPost({ tipo, ciudad, precio }) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams();                       ///herramienta para construir esto: ?tipo=xxx&ciudad=yyy&precio=zzz
     if (tipo) params.append("tipo", tipo);
-    if (ciudad) params.append("ciudad", ciudad);
+    if (ciudad) params.append("ciudad", ciudad);                /// Si existe ciudad, lo añade a la URL
     if (precio) params.append("precio", precio);
 
-    const res = await fetch(`${API_URL}/api/posts/search?${params.toString()}`, {
+    const res = await fetch(`${API_URL}/api/posts/search?${params.toString()}`, {       ///.toString : Porque fetch no entiende objetos, solo texto: "tipo=rústico&ciudad=Valencia"
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -14,7 +14,7 @@ function LoginForm({ setLoggedIn }) {
             const user = await loginUser({ email, password })
             console.log("Usuario logeado:", user)
 
-            localStorage.setItem("token", user.token);      ////Almacena el token del usuario en el navegador                    user.token → es la propiedad token del objeto user ; "token" → es solo el nombre bajo el que guardas ese valor en localStorage
+            localStorage.setItem("token", user.token);       /// Guarda el token que nos devuelve el backend a traves de un objeto user con una propiedad token
             setLoggedIn(true)
             // Solo aquí rediriges
             navigate("/dashboard");         ///Navigate para redirigir al panel de Usuario
@@ -59,5 +59,5 @@ localStorage.setItem("clave", "valor") → guarda un valor en el almacenamiento.
 
 localStorage.getItem("clave") → lee un valor que ya está guardado.
 
-
+////Almacena el token del usuario en el navegador                    user.token → es la propiedad token del objeto user ; "token" → es solo el nombre bajo el que guardas ese valor en localStorage
 */

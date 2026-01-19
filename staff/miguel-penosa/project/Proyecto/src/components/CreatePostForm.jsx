@@ -20,7 +20,7 @@ function CreatePostForm({ userId, onPostCreated }) {
     }
 
 
-    const handleSubmit = async (e) => {     //
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (!userId) {
             setError("No autenticado")
@@ -29,7 +29,7 @@ function CreatePostForm({ userId, onPostCreated }) {
 
         try {
             const newPost = {
-                tipo: form.tipo,
+                tipo: form.tipo,    ///form. sale del estado
                 ciudad: form.ciudad,
                 precio: form.precio,
                 text: form.text,
@@ -37,11 +37,10 @@ function CreatePostForm({ userId, onPostCreated }) {
                 userId: userId
             };
 
-            const created = await createPost(newPost); // la API recibe FormData
-            onPostCreated(created); // el hijo llama onPostCreated(created); → esto ejecuta handlePostCreated del padre.
+            const created = await createPost(newPost);      // ??
+            onPostCreated(created);         // 
 
-            // limpia formulario
-            setForm({
+            setForm({           //// limpia formulario
                 tipo: "",
                 ciudad: "",
                 precio: "",

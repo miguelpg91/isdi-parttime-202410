@@ -2,29 +2,29 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { searchPost } from "../services/api";
 
-function SearchForm() {
+function SearchForm() {         ///COMPONENTE
     const location = useLocation(); // detecta cambios de ruta  ///OJO
 
-    const [filters, setFilters] = useState({
+    const [filters, setFilters] = useState({    ///Filtros de formulario de busqueda
         tipo: "",
         ciudad: "",
         precio: "",
     });
 
     const [results, setResults] = useState([]);      // para guardar posts encontrados
-    const [showOverlay, setShowOverlay] = useState(false);  // ??
+    const [showOverlay, setShowOverlay] = useState(false);  // panel de posts: false => oculto
 
     // reinicia formulario y overlay al cambiar de ruta
     useEffect(() => {
-        setFilters({ tipo: "", ciudad: "", precio: "" });
-        setResults([]);
+        setFilters({ tipo: "", ciudad: "", precio: "" });   /// Reinicia el formulario
+        setResults([]);                                     /// Vacía resultados anteriores
         setShowOverlay(false);
-    }, [location.pathname]);        // ??
+    }, [location.pathname]);        ////// Se ejecuta cuando cambia la ruta
 
     const handleSubmit = async (e) => {     // (e) event
         e.preventDefault();
         try {
-            const foundPosts = await searchPost(filters);
+            const foundPosts = await searchPost(filters);   ///Envia filtros al backend
             setResults(foundPosts);
             setShowOverlay(true);   // mostrar overlay al buscar
         } catch (error) {
@@ -38,8 +38,8 @@ function SearchForm() {
                 <div className="field">
                     <select
                         required
-                        value={filters.tipo}
-                        onChange={(e) => setFilters({ ...filters, tipo: e.target.value })}      ///e.target.value??
+                        value={filters.tipo}                                                     // e.target.value = opción seleccionada.
+                        onChange={(e) => setFilters({ ...filters, tipo: e.target.value })}      /// Copia filtros y actualiza solo tipo
                     >
                         <option value="" disabled hidden></option>
                         <option value="Rústico">Rústico</option>
@@ -80,7 +80,7 @@ function SearchForm() {
             </form>
 
             {/* Panel lateral con posts */}
-            {showOverlay && (
+            {showOverlay && (                                   ////    Si showOverlay(panel de posts) es true,
                 <div className="posts-overlay">
                     <button
                         onClick={() => setShowOverlay(false)}
@@ -88,16 +88,16 @@ function SearchForm() {
                     >
                         Cerrar
                     </button>
-                    {results.length === 0 ? (
+                    {results.length === 0 ? (                   ////    Si no hay resultados → muestra mensaje
                         <p>No se encontraron terrenos</p>
-                    ) : (
-                        results.map((post) => (
+                    ) : (                                       ///     Si hay resultados ...
+                        results.map((post) => (                 ///     Recorre el array results y devuelve componente por cada post
                             <article key={post._id} className="post-card">
                                 <h3>
                                     <span className="city">{post.ciudad}</span> — <span className="tipo">{post.tipo}</span>
                                 </h3>
                                 <p>{post.text}</p>
-                                {post.imagen && (
+                                {post.imagen && (       //// Si el post tiene imagen...
                                     <img
                                         src={post.imagen}
                                         alt={`Imagen de ${post.tipo} en ${post.ciudad}`}
@@ -119,7 +119,20 @@ function SearchForm() {
 export default SearchForm;
 
 
-/// LINEA: 94,95, 97, 102 --->MAP?? ; KEY???; SPAN???; POST.IMAGEN DE DONDE SALE?
+/*
+
+Si showOverlay es false → no se renderiza nada.
+
+Si showOverlay es true → se muestra el panel.
+
+Dentro del panel:
+
+Si results.length === 0 → muestra “No se encontraron terrenos”.
+
+Si hay resultados → recorre results y pinta un post por cada uno.
+
+Si un post tiene imagen → se muestra la imagen.
 
 
-/// ):( ; &&
+
+*/

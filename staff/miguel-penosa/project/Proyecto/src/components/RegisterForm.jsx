@@ -3,22 +3,22 @@ import { registerUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({      /// Guarda los datos de formulario
         username: "",
         email: "",
         password: "",
     })
 
-    const [message, setMessage] = useState("")
-    const navigate = useNavigate()
+    const [message, setMessage] = useState("")      //Mensaje de exito o fracaso
+    const navigate = useNavigate()                  /// Obtiene la función navigate para cambiar de ruta.
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {             /// Se ejecuta al enviar el formulario
         e.preventDefault()
         try {
-            const newUser = await registerUser(formData)
+            const newUser = await registerUser(formData)    // Llama a la API enviando los datos del formulario
             console.log("Usuario registrado:", newUser)
             setMessage("Te has registrado exitosamente")
-            ///if (onSuccess) onSuccess()   //onSuccess sirve para que el hijo (RegisterForm) le avise al padre (App) que todo salió bien, y el padre cambie el estado formType a null. Y por lo tanto se oculte el formulario
+
             navigate("/login")
         } catch (error) {
             console.error(error)
@@ -39,7 +39,7 @@ function RegisterForm() {
                         placeholder=" "
                         value={formData.username}
                         onChange={(e) =>
-                            setFormData({ ...formData, username: e.target.value })
+                            setFormData({ ...formData, username: e.target.value })  //Copia el estado actual (...formData)
                         }
                     />
                     <label>username</label>
@@ -51,7 +51,7 @@ function RegisterForm() {
                         placeholder=" "
                         value={formData.email}
                         onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
+                            setFormData({ ...formData, email: e.target.value })     /// Actualiza solo email con lo escrito
                         }
                     />
                     <label>Email</label>
@@ -63,14 +63,14 @@ function RegisterForm() {
                         placeholder=" "
                         value={formData.password}
                         onChange={(e) =>
-                            setFormData({ ...formData, password: e.target.value })
+                            setFormData({ ...formData, password: e.target.value })      ///e.target.value = lo que el usuario ha escrito.
                         }
                     />
                     <label>Contraseña</label>
                 </div>
                 <button type="submit" className="submit-button">Registrarse</button>
             </form>
-            {message && <p className="succes-message">{message}</p>}
+            {message && <p className="succes-message">{message}</p>}    {/* Si existe un mensaje, muéstralo por pantalla*/}
         </div>
     );
 }
