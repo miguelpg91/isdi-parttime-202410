@@ -30,3 +30,34 @@ const errorHandler = (error, req, res, next) => {
 }
 
 export default errorHandler
+
+
+//Todo error que no conozco → lo considero SystemError
+
+/*
+
+En createPost NO hay ninguna línea que lance explícitamente un SystemError
+
+        Si Mongo / Mongoose falla (DB caída, schema error, etc.):
+
+        - Post.create() lanza un error nativo (Error)
+
+        - Ese error no se captura aquí
+
+        - Sale de createPost
+
+        - Llega al handler
+
+        - El handler hace next(error)
+
+        - El errorHandler lo recibe
+
+        - No es ValidationError
+
+        - Entra en el else
+
+        - Se responde como SystemError (500)
+
+        
+
+*/

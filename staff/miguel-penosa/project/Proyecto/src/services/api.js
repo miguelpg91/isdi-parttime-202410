@@ -86,7 +86,7 @@ export async function editPost(id, formData) {
 // ---- BUSCAR ----
 
 export async function searchPost({ tipo, ciudad, precio }) {
-    const params = new URLSearchParams();                       ///herramienta para construir esto: ?tipo=xxx&ciudad=yyy&precio=zzz
+    const params = new URLSearchParams();                       ///herramienta para construir esto: ?tipo=xxx&ciudad=yyy&precio=zzz    :    ? inicia filtros
     if (tipo) params.append("tipo", tipo);
     if (ciudad) params.append("ciudad", ciudad);                /// Si existe ciudad, lo añade a la URL
     if (precio) params.append("precio", precio);
@@ -107,3 +107,5 @@ export async function searchPost({ tipo, ciudad, precio }) {
 /// Se convierte la respuesta a JSON usando res.json(), y de nuevo el código se "pausa" con await hasta obtener el resultado.
 
 /// Se manda al ROUTERS  : Express automáticamente convierte la cadena JSON en un objeto JavaScript
+
+//toString() es para URLs, stringify() es para body

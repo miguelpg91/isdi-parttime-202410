@@ -35,4 +35,49 @@ export default async function createPost(userId, data) {
 
 
 
-///
+/* VERSION CON ZOB
+
+import Post from "../models/Post.js";
+import { postSchema } from "../com/validate.js";
+import { errors } from "../com/index.js";
+
+const { ValidationError } = errors;
+
+export default async function createPost(userId, data) {
+    const numericPrecio = Number(data.precio);
+
+    const postData = {
+        ...data,
+        precio: numericPrecio
+    };
+
+    // Validación Zod
+    try {
+        postSchema.parse(postData);
+    } catch (err) {
+        if (err.name === "ZodError") {
+            throw new ValidationError(
+                err.errors.map(e => e.message).join(", ")
+            );
+        }
+        throw err;
+    }
+
+    // Validar userId
+    if (typeof userId !== "string" || userId.length < 10) {
+        throw new ValidationError("userId inválido");
+    }
+
+    const post = await Post.create({
+        ...postData,
+        author: userId
+    });
+
+    return post;
+}
+
+
+
+
+
+*/ 

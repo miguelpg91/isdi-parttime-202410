@@ -18,7 +18,7 @@ export const createPostHandler = async (req, res, next) => {
             }
         );
 
-        res.status(201).json(newPost);  //devulve el post creado
+        res.status(201).json(newPost);  //// Devuelve una respuesta HTTP de éxito (201) y convierte el post creado en formato JSON
     } catch (error) {
         next(error);
     }

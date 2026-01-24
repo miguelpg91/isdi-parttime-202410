@@ -17,7 +17,7 @@ console.log("MONGO_URL:", process.env.MONGO_URL);   ///verificar que se está le
 // Middleware global
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*", credentials: true }));   //Dirección del frontend permitido para comunicarse con el backend.
 
-app.use(express.json());            // Permite leer JSON desde req.body
+app.use(express.json());            // Transforma el JSON de la request en un objeto JS (req.body)
 
 console.log("Montando routers...");
 
